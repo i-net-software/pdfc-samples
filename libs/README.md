@@ -1,1 +1,1 @@
-# pdfc-samples
+This folder is intended for JAR dependencies. Please download the [PDFC SDK](https://download.inetsoftware.de/pdfc-sdk-latest.zip) and place at least the files java/PDFC.jar and java/inetcore.jar into this folder.
