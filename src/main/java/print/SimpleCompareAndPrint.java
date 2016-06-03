@@ -19,9 +19,8 @@ import java.io.File;
  *
  * Expected 2 arguments, the path of the pdf files
  *
- * Created by richardr on 02.06.2016.
  */
-public class SimplePrint {
+public class SimpleCompareAndPrint {
 
     public static void main( String[] args ) {
         File[] files = getFileOfArguments( args );
@@ -31,15 +30,9 @@ public class SimplePrint {
         //set up Printer service
         PrintService printService = PrintServiceLookup.lookupDefaultPrintService(); //use the default printservice, for testing purpose it makes sense to use a virtual printer!
         PrintRequestAttributeSet attributes = new HashPrintRequestAttributeSet();
-        //select paper A4
-        attributes.add( MediaSizeName.ISO_A4 );
-        //select orientation landscape
-        attributes.add( OrientationRequested.LANDSCAPE );
 
         new PDFComparer()
                         .addPresenter( new DifferencesPrintPresenter( printService, attributes ) )
-                        .addPresenter( new DifferencesPDFPresenter( files[0].getParentFile() ) )
-                        .addPresenter( new ReportPDFPresenter( false, false, files[0].getParentFile() ) )
                         .compare( files[1], files[0] );
     }
 

@@ -12,7 +12,6 @@ import java.io.File;
  *
  * Expected 2 arguments, the path of the pdf files
  *
- * Created by richardr on 02.06.2016.
  */
 public class NumOfDifferencePageNumber{
 

@@ -1,27 +1,30 @@
-package differences;
+package export;
 
 import com.inet.config.ConfigurationManager;
 import com.inet.pdfc.PDFComparer;
-import com.inet.pdfc.results.ResultModel;
+import com.inet.pdfc.presenter.DifferencesPDFPresenter;
+import com.inet.pdfc.presenter.ReportPDFPresenter;
 
 import java.io.File;
 
 /**
- *  A sample to show the difference/changes beetween 2 pdf files.
+ * A simple Sample for export to pdf file the comparing between 2 PDF Files
  *
- *  Expected 2 arguments, the path of the pdf files
- *
+ * Expected 2 arguments, the path of the pdf files
  */
-public class NumOfDifferences {
+public class SimpleCompareAndExport{
 
     public static void main( String[] args ) {
         File[] files = getFileOfArguments( args );
-        PDFComparer pdfComparer = new PDFComparer();
 
-        ResultModel result = pdfComparer.compare( files[0], files[1] );
-        int differences = result.getDifferencesCount( false );
+        //Used the current i-net PDFC configuration. If no configuration has been previously set then the default configuration will be used.
+        DifferencesPDFPresenter differencesPDFPresenter = new DifferencesPDFPresenter( files[0].getParentFile() );
+        ReportPDFPresenter reportPDFPresenter = new ReportPDFPresenter( false, false, files[0].getParentFile() );
 
-        System.out.println( "differences = " + differences );
+        new PDFComparer()
+                        .addPresenter( differencesPDFPresenter )
+                        .addPresenter( reportPDFPresenter )
+                        .compare( files[1], files[0] );
     }
 
     /**
