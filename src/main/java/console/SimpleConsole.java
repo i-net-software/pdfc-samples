@@ -1,26 +1,22 @@
-package export;
+package console;
 
 import com.inet.config.ConfigurationManager;
 import com.inet.pdfc.PDFComparer;
-import com.inet.pdfc.presenter.DifferencesPDFPresenter;
-import com.inet.pdfc.presenter.ReportPDFPresenter;
+import com.inet.pdfc.presenter.ConsolePresenter;
 
 import java.io.File;
 
 /**
- * A simple Sample for export to pdf file the comparing between 2 PDF Files
+ * A sample for logger output.
  *
- * Expected 2 arguments, the path of the pdf files
+ * Here it will be use the default
  */
-public class SimpleCompareAndExport{
+public class SimpleConsole {
 
     public static void main( String[] args ) {
         File[] files = getFileOfArguments( args );
-
-        //Used the current i-net PDFC configuration. If no configuration has been previously set then the default configuration will be used.
-        DifferencesPDFPresenter differencesPDFPresenter = new DifferencesPDFPresenter( files[0].getParentFile() );
         new PDFComparer()
-                        .addPresenter( differencesPDFPresenter )
+                        .addPresenter( new ConsolePresenter() )
                         .compare( files[1], files[0] );
     }
 

@@ -32,19 +32,22 @@ public class NumOfDifferencePerPage{
         for( DiffGroup difference : differences ) {
             List<Modification> modifications = difference.getModifications();
             if( modifications != null ) {
+                inner:
                 for( Modification modification : modifications ) {
-                    int pageIndex = -1;
                     List<PagedElement> affectedElements = modification.getAffectedElements( true );
                     for( PagedElement affectedElement : affectedElements ) {
-                        pageIndex = affectedElement.getPageIndex();
+                        int pageIndex = affectedElement.getPageIndex();
+                        changePerPage[pageIndex] = changePerPage[pageIndex] + 1;
+                        continue inner;
+
                     }
                     affectedElements = modification.getAffectedElements( false );
                     for( PagedElement affectedElement : affectedElements ) {
-                        pageIndex = affectedElement.getPageIndex();
+                        int pageIndex = affectedElement.getPageIndex();
+                        changePerPage[pageIndex] = changePerPage[pageIndex] + 1;
+                        continue inner;
                     }
-                    changePerPage[pageIndex] = changePerPage[pageIndex] + 1;
                 }
-
             }
         }
 
