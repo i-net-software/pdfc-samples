@@ -6,10 +6,10 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 } 
 if (!file('libs/PDFC.jar').exists() || !file('libs/inetcore.jar').exists()) {
-    ant.fail('Please first download the i-net PDFC SDK at https://www.inetsoftware.de/download?dl=products%253Apdf-content-comparer and place the files PDFC.jar and inetcore.jar in the libs subdirectory.')
+    ant.fail('Please first download the i-net PDFC SDK at https://download.inetsoftware.de/pdfc-sdk-latest.zip and place the files PDFC.jar and inetcore.jar in the libs subdirectory.')
 }
 if (!file('plugins/reporting.zip').exists() || !file('plugins/pdfparserplugin.zip').exists()) {
-    ant.fail('Please first download the i-net PDFC SDK at https://www.inetsoftware.de/download?dl=products%253Apdf-content-comparer and place the files reporting.zip and pdfparserplugin.zip.')
+    ant.fail('Please first download the i-net PDFC SDK at https://download.inetsoftware.de/pdfc-sdk-latest.zip and place the files reporting.zip and pdfparserplugin.zip.')
 }
 
 defaultTasks 'clean','build'
