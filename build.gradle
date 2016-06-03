@@ -5,11 +5,11 @@ sourceCompatibility = 1.8
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 } 
-if (!file('libs/PDFC.jar').exists() || !file('libs/inetcore.jar').exists()) {
-    ant.fail('Please first download the i-net PDFC SDK at https://download.inetsoftware.de/pdfc-sdk-latest.zip and place the files PDFC.jar and inetcore.jar in the libs subdirectory.')
-}
-if (!file('plugins/reporting.zip').exists() || !file('plugins/pdfparserplugin.zip').exists()) {
-    ant.fail('Please first download the i-net PDFC SDK at https://download.inetsoftware.de/pdfc-sdk-latest.zip and place the files reporting.zip and pdfparserplugin.zip.')
+if (!file('libs/PDFC.jar').exists() || !file('libs/inetcore.jar').exists() || 
+    !file('plugins/reporting.zip').exists() || !file('plugins/pdfparserplugin.zip').exists()) {
+    ant.fail('Please first download the i-net PDFC SDK at https://download.inetsoftware.de/pdfc-sdk-latest.zip and place:\n'+
+             ' - plugins/reporting.zip and plugins/pdfparserplugin.zip into the plugins subfolder\n'+
+             ' - java/PDFC.jar and java/inetcore.jar into the libs subfolder')
 }
 
 defaultTasks 'clean','build'

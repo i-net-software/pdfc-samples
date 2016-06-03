@@ -13,8 +13,10 @@ hs_err_pid*
 
 # build files, libs, plugins
 build
-libs
-plugins
+libs/*
+!libs/README.md
+plugins/*
+!plugins/README.md
 
 .DS_Store
 .gradle
