@@ -10,6 +10,8 @@ import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.MediaSizeName;
+import javax.print.attribute.standard.OrientationRequested;
 import java.io.File;
 
 /**
@@ -29,10 +31,10 @@ public class SimplePrint {
         //set up Printer service
         PrintService printService = PrintServiceLookup.lookupDefaultPrintService(); //use the default printservice, for testing purpose it makes sense to use a virtual printer!
         PrintRequestAttributeSet attributes = new HashPrintRequestAttributeSet();
-        //        //select paper A4
-        //        attributes.add( MediaSizeName.ISO_A4 );
-        //        //select orientation landscape
-        //        attributes.add( OrientationRequested.LANDSCAPE );
+        //select paper A4
+        attributes.add( MediaSizeName.ISO_A4 );
+        //select orientation landscape
+        attributes.add( OrientationRequested.LANDSCAPE );
 
         new PDFComparer()
                         .addPresenter( new DifferencesPrintPresenter( printService, attributes ) )
