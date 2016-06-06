@@ -15,12 +15,11 @@ import java.io.File;
 import java.util.List;
 
 /**
- * A sample to show the modification between 2 pdf files in a typ sorted list.
+ * A sample to show the modification between 2 pdf files in a type-sorted list.
  *
  * Expected 2 arguments, the path of the pdf files
  */
-public class OutputSpecifyModifyTyps {
-
+public class OutputSpecifyModifyTypes {
     public static void main( String[] args ) {
         File[] files = getFileOfArguments( args );
 
@@ -62,10 +61,10 @@ public class OutputSpecifyModifyTyps {
     }
 
     /**
-     * Get 2 Files back, that was checked
+     * Get 2 files back that are to be checked for comparisons
      *
      * @param args the arguments
-     * @return 2 Files
+     * @return 2 files to compare
      */
     public static File[] getFileOfArguments(final String[] args){
         ConfigurationManager.getInstance().setCurrent( ConfigurationManager.getInstance().get( 1, "Default" ) );
@@ -76,11 +75,11 @@ public class OutputSpecifyModifyTyps {
     }
 
     /**
-     * For get a File-Object out a String-Path
+     * Returns a File object based on a string path
      *
-     * Check for null, exists and directory
+     * The file must not be null, must exist and must not be a directory
      *
-     * @param file Path for the File
+     * @param file Path to the File
      * @return The Fileobject
      */
     public static File checkAndGetFile( final String file){
@@ -95,8 +94,7 @@ public class OutputSpecifyModifyTyps {
         if( fileObject.isDirectory()){
             throw new IllegalArgumentException( "The file is a folder and not a pdf file.\n parameter = " + file );
         }
-
-        return  fileObject;
+        return fileObject;
     }
 
 
