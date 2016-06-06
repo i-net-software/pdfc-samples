@@ -3,8 +3,12 @@ package configuration;
 import com.inet.config.ConfigurationManager;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.config.*;
-import com.inet.pdfc.presenter.DifferencesPDFPresenter;
+import com.inet.pdfc.presenter.DifferencesPrintPresenter;
 
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
 import java.io.File;
 import java.util.InvalidPropertiesFormatException;
 
@@ -26,11 +30,14 @@ public class UseXMLConfiguration {
             e.printStackTrace();
         }
 
-        DifferencesPDFPresenter differencesPDFPresenter = new DifferencesPDFPresenter( files[0].getParentFile() );
+        PrintService printService = PrintServiceLookup.lookupDefaultPrintService(); //use the default printservice, for testing purpose it makes sense to use a virtual printer!
+        PrintRequestAttributeSet attributes = new HashPrintRequestAttributeSet();
+
         new PDFComparer()
                         .setConfiguration( configuration )
-                        .addPresenter( differencesPDFPresenter )
+                        .addPresenter( new DifferencesPrintPresenter( printService, attributes ) )
                         .compare( files[1], files[0] );
+
     }
 
 

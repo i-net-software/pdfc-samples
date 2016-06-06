@@ -43,6 +43,10 @@ public class OutputSpecifyModifyTyps {
         pdfComparer.addPresenter( new ConsolePresenter() ).compare( files[1], files[0] );
     }
 
+    /**
+     * Show alle modification
+     * @param result the result of comparision 2 pdf files
+     */
     public static void showModification(final ResultModel result){
         List<DiffGroup> differences = result.getDifferences( false );
 
