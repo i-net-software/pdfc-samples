@@ -11,7 +11,7 @@ import javax.print.attribute.PrintRequestAttributeSet;
 import java.io.File;
 
 /**
- * A simple OutputSpecifyModifyTyps for print the comparing between 2 PDF Files
+ * A simple sample for printing the result for the comparing between 2 PDF Files
  *
  * Expected 2 arguments, the path of the pdf files
  *

@@ -15,7 +15,9 @@ import java.io.File;
 import java.util.List;
 
 /**
- * Created by richardr on 03.06.2016.
+ * A sample to show the modification between 2 pdf files in a typ sorted list.
+ *
+ * Expected 2 arguments, the path of the pdf files
  */
 public class OutputSpecifyModifyTyps {
 

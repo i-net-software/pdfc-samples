@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * A OutputSpecifyModifyTyps for export to pdf file the comparing between 2 PDF Files,
+ * A sample for export to pdf file the comparing between 2 PDF Files,
  * for the case to change the export path.
  *
  * Expected 3 arguments, the path of the 2 pdf files that will be compared.

@@ -13,7 +13,11 @@ import javax.print.attribute.standard.OrientationRequested;
 import java.io.File;
 
 /**
- * Created by richardr on 03.06.2016.
+ * A sample for printing the result for the comparing between 2 PDF files
+ * with some printsetting
+ *
+ *
+ * Expected 2 arguments, the path of the pdf files
  */
 public class CompareAndPrint {
 

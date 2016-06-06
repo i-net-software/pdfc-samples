@@ -11,7 +11,7 @@ import java.io.File;
 import java.util.List;
 
 /**
- * A OutputSpecifyModifyTyps that calculate the differences per page.
+ * A sample that calculate the differences per page.
  *
  * Expected 2 arguments, the path of the pdf files
  *
