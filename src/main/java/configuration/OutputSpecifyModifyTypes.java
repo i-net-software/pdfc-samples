@@ -15,11 +15,11 @@ import java.io.File;
 import java.util.List;
 
 /**
- * A sample to show the modification between 2 pdf files in a typ sorted list.
+ * A sample to show the modification between 2 pdf files in a type-sorted list.
  *
  * Expected 2 arguments, the path of the pdf files
  */
-public class OutputSpecifyModifyTyps {
+public class OutputSpecifyModifyTypes {
 
     public static void main( String[] args ) {
         File[] files = getFileOfArguments( args );
