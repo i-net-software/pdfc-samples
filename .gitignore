@@ -20,3 +20,5 @@ plugins/*
 
 .DS_Store
 .gradle
+
+*.iml
