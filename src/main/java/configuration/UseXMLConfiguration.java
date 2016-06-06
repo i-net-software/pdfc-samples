@@ -12,7 +12,7 @@ import java.util.InvalidPropertiesFormatException;
  * A sample to show, how use a PDFC-Config XML-File.
  *
  * Expected 3 arguments, the first 2 arguments for the path of the pdf files and the last one
- * for the xml config file.
+ * for the XML config file.
  */
 public class UseXMLConfiguration {
 
@@ -50,7 +50,7 @@ public class UseXMLConfiguration {
 
     /**
      * For get a File-Object out a String-Path
-     * Check for null, exists and directory
+     * The file must not be null, must exist and must not be a directory
      *
      * @param file Path for the File
      * @return The Fileobject
@@ -67,7 +67,6 @@ public class UseXMLConfiguration {
         if( fileObject.isDirectory() ) {
             throw new IllegalArgumentException( "The file is a folder and not a pdf file.\n parameter = " + file );
         }
-
         return fileObject;
     }
 }
