@@ -2,60 +2,45 @@ package configuration;
 
 import com.inet.config.ConfigurationManager;
 import com.inet.pdfc.PDFComparer;
-import com.inet.pdfc.generator.model.DiffGroup;
+import com.inet.pdfc.model.Document;
+import com.inet.pdfc.model.DrawableElement;
+import com.inet.pdfc.model.Page;
 import com.inet.pdfc.results.ResultModel;
-import com.inet.pdfc.results.ResultPage;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
- * A sample to show the render function with a simplify marker function.
+ * A sample to show pdf datas
  *
  * Expected 2 arguments, the path of the pdf files
  */
-public class Render {
+public class PDFAnalyse {
 
     public static void main( String[] args ) {
         File[] files = getFileOfArguments( args );
 
         PDFComparer pdfComparer = new PDFComparer();
         ResultModel compare = pdfComparer.compare( files[0], files[1] );
-        ResultPage page = compare.getPage( 0, true );
 
-        JFrame frame = new JFrame(  );
-        frame.setTitle("PDF Difference");
-        frame.setSize(page.getWidth(), page.getHeight());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add( new JComponent() {
-            @Override
-            public void paint(Graphics g) {
-                super.paint(g);
-                Graphics2D g2d = (Graphics2D) g;
-                int pageNumber = 1;
+        try {
+            Document document = compare.getComparisonParameters().getFirstFile().getContent();
+            System.out.println( "number of pages = " + document.getNumPages() );
 
-                //draw the pdf file, alternative: page.renderPage(1.0, g2d  );
-                BufferedImage pageImage = page.getPageImage( pageNumber );
-                g2d.drawImage( pageImage, 0,0, null );
+            for( int i = 0; i < document.getNumPages(); ++i ) {
+                System.out.println( "\npage number = " + i );
+                Page page = document.getPage( i );
 
-
-
-                //for highlight the differences lines
-                g2d.setColor(new Color( 0,40,255,40  ) ); //transparent blue
-                List<DiffGroup> differences = compare.getDifferences( false );
-                for( DiffGroup difference : differences ) {
-                    System.out.println( "difference = " + difference );
-
-                    Rectangle bounds = difference.getBounds( true );
-                    g2d.fillRect( bounds.x, bounds.y, page.getWidth(), bounds.height );
+                List<DrawableElement> list =page.getElementList().getList();
+                for( DrawableElement drawableElement : list ) {
+                    System.out.println( "drawableElement = " + drawableElement );
                 }
-            }
-        } );
-        frame.setVisible( true );
 
+            }
+        } catch( IOException e ) {
+            e.printStackTrace();
+        }
     }
 
     /**

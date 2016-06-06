@@ -100,6 +100,14 @@ public class ReportingToSpecificFilename {
         return  fileObject;
     }
 
+    /**
+     * Returns a File object based on a string path
+     *
+     * The file must not be null and must not be a directory
+     *
+     * @param file Path to the File
+     * @return The Fileobject
+     */
     public static File checkAndCreateFile( final String file){
         final File fileObject = new File( file );
 

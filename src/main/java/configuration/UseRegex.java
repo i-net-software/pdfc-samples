@@ -35,6 +35,10 @@ public class UseRegex {
                                           .compare( files[0], files[1] ) );
     }
 
+    /**
+     * Show alle modification
+     * @param result the result of comparision 2 pdf files
+     */
     public static void showModification(final ResultModel result){
         List<DiffGroup> differences = result.getDifferences( false );
 
@@ -50,42 +54,41 @@ public class UseRegex {
     }
 
     /**
-     * Get 2 Files back, that was checked
+     * Get 2 files back that are to be checked for comparisons
      *
      * @param args the arguments
-     * @return 2 Files
+     * @return 2 files to compare
      */
-    public static File[] getFileOfArguments(final String[] args){
+    public static File[] getFileOfArguments( final String[] args ) {
         ConfigurationManager.getInstance().setCurrent( ConfigurationManager.getInstance().get( 1, "Default" ) );
-        if (args == null || args.length != 2) {
+        if( args == null || args.length != 2 ) {
             throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2>" );
         }
-        return new File[]{ checkAndGetFile( args[0] ), checkAndGetFile( args[1] )};
+        return new File[] { checkAndGetFile( args[0] ), checkAndGetFile( args[1] ) };
     }
 
     /**
-     * For get a File-Object out a String-Path
+     * Returns a File object based on a string path
      *
-     * Check for null, exists and directory
+     * The file must not be null, must exist and must not be a directory
      *
-     * @param file Path for the File
+     * @param file Path to the File
      * @return The Fileobject
      */
-    public static File checkAndGetFile( final String file){
-        if(file == null){
+    public static File checkAndGetFile( final String file ) {
+        if( file == null ) {
             throw new IllegalArgumentException( "The parameter is empty.\n parameter = " + file );
         }
         final File fileObject = new File( file );
 
-        if( ! fileObject.exists() ){
+        if( !fileObject.exists() ) {
             throw new IllegalArgumentException( "The file didn't exist.\n parameter = " + file );
         }
-        if( fileObject.isDirectory()){
+        if( fileObject.isDirectory() ) {
             throw new IllegalArgumentException( "The file is a folder and not a pdf file.\n parameter = " + file );
         }
 
-        return  fileObject;
+        return fileObject;
     }
-
 
 }

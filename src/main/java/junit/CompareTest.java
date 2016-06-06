@@ -32,12 +32,11 @@ public class CompareTest {
         ResultModel result = pdfComparer.compare( example1, example2 );
         InfoData comparisonParameters = result.getComparisonParameters();
 
-
         Assert.assertEquals( 10, result.getDifferencesCount( false ));
         Assert.assertEquals( 10, result.getDifferencesCount( true ));
 
         Assert.assertEquals( 3, comparisonParameters.getFirstTotalPageNumber());
         Assert.assertEquals( 3, comparisonParameters.getSecondTotalPageNumber());
-
     }
+
 }
