@@ -57,7 +57,7 @@ public class OutputSpecifyModifyTypes {
     }
 
     /**
-     * Get 2 files back that were checked for comparisons
+     * Get 2 files back that are to be checked for comparisons
      *
      * @param args the arguments
      * @return 2 files to compare
@@ -71,12 +71,12 @@ public class OutputSpecifyModifyTypes {
     }
 
     /**
-     * For get a File-Object out a String-Path
+     * Returns a File object based on a string path
      *
      * The file must not be null, must exist and must not be a directory
      *
-     * @param file Path for the File
-     * @return The File object
+     * @param file Path to the File
+     * @return The Fileobject
      */
     public static File checkAndGetFile( final String file){
         if(file == null){

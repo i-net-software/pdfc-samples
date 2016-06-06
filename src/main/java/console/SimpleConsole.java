@@ -9,7 +9,7 @@ import java.io.File;
 /**
  * A sample for logger output.
  *
- * Here it will be use the default
+ * This sample uses the simplest logger: it logs to the system.out logstream.
  */
 public class SimpleConsole {
 
@@ -21,10 +21,10 @@ public class SimpleConsole {
     }
 
     /**
-     * Get 2 Files back, that was checked
+     * Get 2 files back that are to be checked for comparisons
      *
      * @param args the arguments
-     * @return 2 Files
+     * @return 2 files to compare
      */
     public static File[] getFileOfArguments(final String[] args){
         ConfigurationManager.getInstance().setCurrent( ConfigurationManager.getInstance().get( 1, "Default" ) );
@@ -35,11 +35,11 @@ public class SimpleConsole {
     }
 
     /**
-     * For get a File-Object out a String-Path
+     * Returns a File object based on a string path
      *
-     * Check for null, exists and directory
+     * The file must not be null, must exist and must not be a directory
      *
-     * @param file Path for the File
+     * @param file Path to the File
      * @return The Fileobject
      */
     public static File checkAndGetFile( final String file){

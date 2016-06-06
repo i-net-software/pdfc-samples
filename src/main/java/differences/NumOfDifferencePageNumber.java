@@ -11,7 +11,6 @@ import java.io.File;
  * A sample to show the difference number of pages between 2 pdf files.
  *
  * Expected 2 arguments, the path of the pdf files
- *
  */
 public class NumOfDifferencePageNumber{
 
