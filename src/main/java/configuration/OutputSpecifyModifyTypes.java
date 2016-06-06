@@ -20,7 +20,6 @@ import java.util.List;
  * Expected 2 arguments, the path of the pdf files
  */
 public class OutputSpecifyModifyTypes {
-
     public static void main( String[] args ) {
         File[] files = getFileOfArguments( args );
 
@@ -58,10 +57,10 @@ public class OutputSpecifyModifyTypes {
     }
 
     /**
-     * Get 2 Files back, that was checked
+     * Get 2 files back that were checked for comparisons
      *
      * @param args the arguments
-     * @return 2 Files
+     * @return 2 files to compare
      */
     public static File[] getFileOfArguments(final String[] args){
         ConfigurationManager.getInstance().setCurrent( ConfigurationManager.getInstance().get( 1, "Default" ) );
@@ -74,10 +73,10 @@ public class OutputSpecifyModifyTypes {
     /**
      * For get a File-Object out a String-Path
      *
-     * Check for null, exists and directory
+     * The file must not be null, must exist and must not be a directory
      *
      * @param file Path for the File
-     * @return The Fileobject
+     * @return The File object
      */
     public static File checkAndGetFile( final String file){
         if(file == null){
@@ -91,8 +90,7 @@ public class OutputSpecifyModifyTypes {
         if( fileObject.isDirectory()){
             throw new IllegalArgumentException( "The file is a folder and not a pdf file.\n parameter = " + file );
         }
-
-        return  fileObject;
+        return fileObject;
     }
 
 
