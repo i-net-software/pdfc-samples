@@ -1,10 +1,11 @@
 package export;
 
-import com.inet.config.ConfigurationManager;
+import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.presenter.DifferencesPDFPresenter;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * A simple sample for export to pdf file the comparing between 2 PDF Files
@@ -14,6 +15,12 @@ import java.io.File;
 public class SimpleCompareAndExport{
 
     public static void main( String[] args ) {
+        try {
+            PDFC.requestAndSetTrialLicenseIfRequired();
+        } catch( IOException e ) {
+            e.printStackTrace();
+        }
+
         File[] files = getFileOfArguments( args );
 
         //Used the current i-net PDFC configuration. If no configuration has been previously set then the default configuration will be used.
@@ -30,7 +37,6 @@ public class SimpleCompareAndExport{
      * @return 2 files to compare
      */
     public static File[] getFileOfArguments(final String[] args){
-        ConfigurationManager.getInstance().setCurrent( ConfigurationManager.getInstance().get( 1, "Default" ) );
         if (args == null || args.length != 2) {
             throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2>" );
         }

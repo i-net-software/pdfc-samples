@@ -1,6 +1,6 @@
 package differences;
 
-import com.inet.config.ConfigurationManager;
+import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.generator.model.DiffGroup;
 import com.inet.pdfc.generator.model.Modification;
@@ -8,6 +8,7 @@ import com.inet.pdfc.model.PagedElement;
 import com.inet.pdfc.results.ResultModel;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -19,8 +20,13 @@ import java.util.List;
 public class NumOfDifferencePerPage{
 
     public static void main( String[] args ) {
-        File[] files = getFileOfArguments( args );
+        try {
+            PDFC.requestAndSetTrialLicenseIfRequired();
+        } catch( IOException e ) {
+            e.printStackTrace();
+        }
 
+        File[] files = getFileOfArguments( args );
         PDFComparer pdfComparer = new PDFComparer();
         ResultModel result = pdfComparer.compare( files[0], files[1] );
 
@@ -53,8 +59,7 @@ public class NumOfDifferencePerPage{
 
         //output the result
         for( int i = 0; i < changePerPage.length; i++ ) {
-            int i1 = changePerPage[i];
-            System.out.println( (i+1) + ". page has change = " + i1 );
+            System.out.println( (i+1) + ". page has change = " + changePerPage[i] );
         }
     }
 
@@ -65,7 +70,6 @@ public class NumOfDifferencePerPage{
      * @return 2 files to compare
      */
     public static File[] getFileOfArguments(final String[] args){
-        ConfigurationManager.getInstance().setCurrent( ConfigurationManager.getInstance().get( 1, "Default" ) );
         if (args == null || args.length != 2) {
             throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2>" );
         }

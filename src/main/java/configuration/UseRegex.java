@@ -1,6 +1,6 @@
 package configuration;
 
-import com.inet.config.ConfigurationManager;
+import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.config.*;
 import com.inet.pdfc.generator.model.DiffGroup;
@@ -8,6 +8,7 @@ import com.inet.pdfc.generator.model.Modification;
 import com.inet.pdfc.results.ResultModel;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -18,8 +19,13 @@ import java.util.List;
 public class UseRegex {
 
     public static void main( String[] args ) {
-        File[] files = getFileOfArguments( args );
+        try {
+            PDFC.requestAndSetTrialLicenseIfRequired();
+        } catch( IOException e ) {
+            e.printStackTrace();
+        }
 
+        File[] files = getFileOfArguments( args );
         PDFComparer pdfComparer = new PDFComparer();
 
         System.out.println( "\nFiltered "  );
@@ -41,7 +47,6 @@ public class UseRegex {
      */
     public static void showModification(final ResultModel result){
         List<DiffGroup> differences = result.getDifferences( false );
-
         for( DiffGroup difference : differences ) {
             List<Modification> modifications = difference.getModifications();
             if(modifications != null) {
@@ -60,7 +65,6 @@ public class UseRegex {
      * @return 2 files to compare
      */
     public static File[] getFileOfArguments( final String[] args ) {
-        ConfigurationManager.getInstance().setCurrent( ConfigurationManager.getInstance().get( 1, "Default" ) );
         if( args == null || args.length != 2 ) {
             throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2>" );
         }

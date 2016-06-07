@@ -1,17 +1,15 @@
 package configuration;
 
-import com.inet.config.ConfigurationManager;
+import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
-import com.inet.pdfc.config.CompareType;
-import com.inet.pdfc.config.ConfigurationFactory;
-import com.inet.pdfc.config.IConfiguration;
-import com.inet.pdfc.config.PDFCProperty;
+import com.inet.pdfc.config.*;
 import com.inet.pdfc.generator.model.DiffGroup;
 import com.inet.pdfc.generator.model.Modification;
 import com.inet.pdfc.presenter.ConsolePresenter;
 import com.inet.pdfc.results.ResultModel;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -21,10 +19,15 @@ import java.util.List;
  */
 public class OutputSpecifyModifyTypes {
     public static void main( String[] args ) {
-        File[] files = getFileOfArguments( args );
+        try {
+            PDFC.requestAndSetTrialLicenseIfRequired();
+        } catch( IOException e ) {
+            e.printStackTrace();
+        }
 
+        File[] files = getFileOfArguments( args );
         PDFComparer pdfComparer = new PDFComparer();
-        IConfiguration configuration = ConfigurationFactory.getConfiguration();
+        IConfiguration configuration = new DefaultConfiguration(  );
 
         System.out.println("all modify texts");
         configuration.putValue( PDFCProperty.CONTINUOUS_COMPARE_TYPES, "" + CompareType.TEXT );
@@ -37,9 +40,6 @@ public class OutputSpecifyModifyTypes {
         System.out.println("\nall modify images");
         configuration.putValue( PDFCProperty.CONTINUOUS_COMPARE_TYPES, "" + CompareType.IMAGE );
         showModification( pdfComparer.setConfiguration( configuration ).compare( files[0], files[1] ) );
-
-
-        pdfComparer.addPresenter( new ConsolePresenter() ).compare( files[1], files[0] );
     }
 
     /**
@@ -67,7 +67,6 @@ public class OutputSpecifyModifyTypes {
      * @return 2 files to compare
      */
     public static File[] getFileOfArguments(final String[] args){
-        ConfigurationManager.getInstance().setCurrent( ConfigurationManager.getInstance().get( 1, "Default" ) );
         if (args == null || args.length != 2) {
             throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2>" );
         }

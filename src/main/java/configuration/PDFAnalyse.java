@@ -1,6 +1,6 @@
 package configuration;
 
-import com.inet.config.ConfigurationManager;
+import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.model.Document;
 import com.inet.pdfc.model.DrawableElement;
@@ -19,8 +19,13 @@ import java.util.List;
 public class PDFAnalyse {
 
     public static void main( String[] args ) {
-        File[] files = getFileOfArguments( args );
+        try {
+            PDFC.requestAndSetTrialLicenseIfRequired();
+        } catch( IOException e ) {
+            e.printStackTrace();
+        }
 
+        File[] files = getFileOfArguments( args );
         PDFComparer pdfComparer = new PDFComparer();
         ResultModel compare = pdfComparer.compare( files[0], files[1] );
 
@@ -34,7 +39,7 @@ public class PDFAnalyse {
 
                 List<DrawableElement> list =page.getElementList().getList();
                 for( DrawableElement drawableElement : list ) {
-                    System.out.println( "drawableElement = " + drawableElement );
+                    System.out.println( "Type = "+ drawableElement.getType() + "\t\t" + drawableElement );
                 }
 
             }
@@ -50,7 +55,6 @@ public class PDFAnalyse {
      * @return 2 Files
      */
     public static File[] getFileOfArguments(final String[] args){
-        ConfigurationManager.getInstance().setCurrent( ConfigurationManager.getInstance().get( 1, "Default" ) );
         if (args == null || args.length != 2) {
             throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2>" );
         }

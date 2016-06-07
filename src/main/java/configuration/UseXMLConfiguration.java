@@ -1,6 +1,6 @@
 package configuration;
 
-import com.inet.config.ConfigurationManager;
+import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.config.*;
 import com.inet.pdfc.presenter.DifferencesPrintPresenter;
@@ -10,6 +10,7 @@ import javax.print.PrintServiceLookup;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import java.io.File;
+import java.io.IOException;
 import java.util.InvalidPropertiesFormatException;
 
 /**
@@ -21,6 +22,12 @@ import java.util.InvalidPropertiesFormatException;
 public class UseXMLConfiguration {
 
     public static void main( String[] args ) {
+        try {
+            PDFC.requestAndSetTrialLicenseIfRequired();
+        } catch( IOException e ) {
+            e.printStackTrace();
+        }
+
         File[] files = getFileOfArguments( args );
         IConfiguration configuration = null;
         try {
@@ -48,7 +55,6 @@ public class UseXMLConfiguration {
      * @return 2 files to compare
      */
     public static File[] getFileOfArguments( final String[] args ) {
-        ConfigurationManager.getInstance().setCurrent( ConfigurationManager.getInstance().get( 1, "Default" ) );
         if( args == null || args.length != 3 ) {
             throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2> <XML-Configuration-File>" );
         }

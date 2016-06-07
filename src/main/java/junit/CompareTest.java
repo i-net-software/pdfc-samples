@@ -1,6 +1,6 @@
 package junit;
 
-import com.inet.config.ConfigurationManager;
+import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.generator.message.InfoData;
 import com.inet.pdfc.results.ResultModel;
@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * A sample for JUnit-testcases
@@ -19,7 +20,12 @@ public class CompareTest {
 
     @Before
     public void before(){
-        ConfigurationManager.getInstance().setCurrent( ConfigurationManager.getInstance().get( 1, "Default" ) );
+        try {
+            PDFC.requestAndSetTrialLicenseIfRequired();
+        } catch( IOException e ) {
+            e.printStackTrace();
+        }
+
         pdfComparer = new PDFComparer();
     }
 

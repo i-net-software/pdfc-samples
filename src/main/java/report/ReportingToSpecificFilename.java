@@ -1,6 +1,6 @@
 package report;
 
-import com.inet.config.ConfigurationManager;
+import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.presenter.ReportPDFPresenter;
 
@@ -22,6 +22,12 @@ import java.io.OutputStream;
 public class ReportingToSpecificFilename {
 
     public static void main( String[] args ) {
+        try {
+            PDFC.requestAndSetTrialLicenseIfRequired();
+        } catch( IOException e ) {
+            e.printStackTrace();
+        }
+
         File[] files = getFileOfArguments( args );
         File exportFile = checkAndCreateFile( args[2] );
 
@@ -69,7 +75,6 @@ public class ReportingToSpecificFilename {
      * @return 2 files to compare
      */
     public static File[] getFileOfArguments(final String[] args){
-        ConfigurationManager.getInstance().setCurrent( ConfigurationManager.getInstance().get( 1, "Default" ) );
         if (args == null || args.length != 3  ) {
             throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2> <PDF-File-Output>" );
         }

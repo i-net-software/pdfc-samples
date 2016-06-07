@@ -1,10 +1,11 @@
 package console;
 
-import com.inet.config.ConfigurationManager;
+import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.presenter.ConsolePresenter;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * A sample for logger output.
@@ -14,6 +15,12 @@ import java.io.File;
 public class SimpleConsole {
 
     public static void main( String[] args ) {
+        try {
+            PDFC.requestAndSetTrialLicenseIfRequired();
+        } catch( IOException e ) {
+            e.printStackTrace();
+        }
+
         File[] files = getFileOfArguments( args );
         new PDFComparer()
                         .addPresenter( new ConsolePresenter() )
@@ -27,7 +34,6 @@ public class SimpleConsole {
      * @return 2 files to compare
      */
     public static File[] getFileOfArguments(final String[] args){
-        ConfigurationManager.getInstance().setCurrent( ConfigurationManager.getInstance().get( 1, "Default" ) );
         if (args == null || args.length != 2) {
             throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2>" );
         }
