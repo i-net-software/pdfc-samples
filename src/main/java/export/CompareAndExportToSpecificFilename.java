@@ -41,7 +41,6 @@ public class CompareAndExportToSpecificFilename {
         DifferencesPDFPresenter differencesPDFPresenter = new PersonalDifferencesPDFPresenter( exportFile );
 
         new PDFComparer()
-                        .addPresenter( new DifferencesPDFPresenter( files[0].getParentFile() ) )
                         .addPresenter( differencesPDFPresenter )
                         .compare( files[1], files[0] );
     }
