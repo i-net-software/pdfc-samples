@@ -5,7 +5,6 @@ import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.config.*;
 import com.inet.pdfc.generator.model.DiffGroup;
 import com.inet.pdfc.generator.model.Modification;
-import com.inet.pdfc.presenter.ConsolePresenter;
 import com.inet.pdfc.results.ResultModel;
 
 import java.io.File;
