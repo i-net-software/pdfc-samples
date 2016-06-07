@@ -16,13 +16,16 @@ import java.io.IOException;
 /**
  * A sample for printing the result of the comparison of 2 PDF files
  * with some print settings
- *
- *
  * Expected 2 arguments, the path of the PDF files
  */
 public class CompareAndPrint {
 
-    // TODO : Javadoc
+    /**
+     * Start the sample, to show the printing function of the result of comparison between 2 PDF files
+     * with some print settings
+     *
+     * @param args Expected 2 arguments, the path of the PDF files
+     */
     public static void main( String[] args ) {
         try {
             PDFC.requestAndSetTrialLicenseIfRequired();
@@ -63,7 +66,6 @@ public class CompareAndPrint {
 
     /**
      * Returns a File object based on a string path
-     *
      * The file must not be null, must exist and must not be a directory
      *
      * @param file path to the file

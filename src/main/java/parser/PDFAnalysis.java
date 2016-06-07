@@ -13,12 +13,15 @@ import java.util.List;
 
 /**
  * A sample to show the internal PDF data structure
- *
  * Expected 2 arguments, the path of the PDF files
  */
 public class PDFAnalysis {
 
-    // TODO : Javadoc
+    /**
+     * Start the sample, to show the internal PDF data structure
+     *
+     * @param args Expected 2 arguments, the path of the PDF files
+     */
     public static void main( String[] args ) {
         try {
             PDFC.requestAndSetTrialLicenseIfRequired();
@@ -38,9 +41,9 @@ public class PDFAnalysis {
                 System.out.println( "\npage number = " + i );
                 Page page = document.getPage( i );
 
-                List<DrawableElement> list =page.getElementList().getList();
+                List<DrawableElement> list = page.getElementList().getList();
                 for( DrawableElement drawableElement : list ) {
-                    System.out.println( "Type = "+ drawableElement.getType() + "\t\t" + drawableElement );
+                    System.out.println( "Type = " + drawableElement.getType() + "\t\t" + drawableElement );
                 }
 
             }
@@ -55,36 +58,33 @@ public class PDFAnalysis {
      * @param args the arguments
      * @return 2 files to compare
      */
-    public static File[] getFileOfArguments(final String[] args){
-        if (args == null || args.length != 2) {
+    public static File[] getFileOfArguments( final String[] args ) {
+        if( args == null || args.length != 2 ) {
             throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2>" );
         }
-        return new File[]{ checkAndGetFile( args[0] ), checkAndGetFile( args[1] )};
+        return new File[] { checkAndGetFile( args[0] ), checkAndGetFile( args[1] ) };
     }
 
     /**
      * Returns a File object based on a string path
-     *
      * The file must not be null, must exist and must not be a directory
      *
      * @param file path to the file
      * @return The File object
      */
-    public static File checkAndGetFile( final String file){
-        if(file == null){
+    public static File checkAndGetFile( final String file ) {
+        if( file == null ) {
             throw new IllegalArgumentException( "The parameter is empty.\n parameter = " + file );
         }
         final File fileObject = new File( file );
 
-        if( ! fileObject.exists() ){
+        if( !fileObject.exists() ) {
             throw new IllegalArgumentException( "The file didn't exist.\n parameter = " + file );
         }
-        if( fileObject.isDirectory()){
+        if( fileObject.isDirectory() ) {
             throw new IllegalArgumentException( "The file is a folder and not a PDF file.\n parameter = " + file );
         }
 
-        return  fileObject;
+        return fileObject;
     }
-
-
 }

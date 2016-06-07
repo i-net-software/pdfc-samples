@@ -15,7 +15,6 @@ import java.util.InvalidPropertiesFormatException;
 
 /**
  * A sample to show, how use a PDFC-Config XML-File.
- *
  * Expects 3 arguments - the first 2 arguments for the paths of the PDF files to be compared and the last one
  * for the XML config file.
  */
@@ -25,7 +24,7 @@ public class UseXMLConfiguration {
      * Start the sample, that show, how use a PDFC-Config XML-File.
      *
      * @param args Expected 3 arguments, the first 2 arguments for the path of the PDF files and the last one
-     * for the XML config file.
+     *             for the XML config file.
      */
     public static void main( String[] args ) {
         try {
@@ -39,20 +38,19 @@ public class UseXMLConfiguration {
         try {
             configuration = new XMLConfiguration( files[2] );
         } catch( InvalidPropertiesFormatException e ) {
-            System.out.println("The file = " + files[2] + " is not a correct XML-Configuration File" );
+            System.out.println( "The file = " + files[2] + " is not a correct XML-Configuration File" );
             e.printStackTrace();
         }
 
-        PrintService printService = PrintServiceLookup.lookupDefaultPrintService(); //use the default printservice, for testing purpose it makes sense to use a virtual printer!
+        PrintService printService = PrintServiceLookup
+                        .lookupDefaultPrintService(); //use the default printservice, for testing purpose it makes sense to use a virtual printer!
         PrintRequestAttributeSet attributes = new HashPrintRequestAttributeSet();
 
         new PDFComparer()
                         .setConfiguration( configuration )
                         .addPresenter( new DifferencesPrintPresenter( printService, attributes ) )
                         .compare( files[1], files[0] );
-
     }
-
 
     /**
      * Get 2 files that are to be checked for comparisons
@@ -62,14 +60,14 @@ public class UseXMLConfiguration {
      */
     public static File[] getFileOfArguments( final String[] args ) {
         if( args == null || args.length != 3 ) {
-            throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2> <XML-Configuration-File>" );
+            throw new IllegalArgumentException(
+                            "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2> <XML-Configuration-File>" );
         }
-        return new File[] { checkAndGetFile( args[0] ), checkAndGetFile( args[1]), checkAndGetFile( args[2] )};
+        return new File[] { checkAndGetFile( args[0] ), checkAndGetFile( args[1] ), checkAndGetFile( args[2] ) };
     }
 
     /**
      * Returns a File object based on a string path
-     *
      * The file must not be null, must exist and must not be a directory
      *
      * @param file path to the file

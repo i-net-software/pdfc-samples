@@ -13,7 +13,6 @@ import java.util.List;
 
 /**
  * A simple sample for using regular expressions for filtering which texts are to be compared.
- *
  * Expects 2 arguments - the paths of the PDF files
  */
 public class UseRegex {
@@ -33,12 +32,12 @@ public class UseRegex {
         File[] files = getFileOfArguments( args );
         PDFComparer pdfComparer = new PDFComparer();
 
-        System.out.println( "\nFiltered "  );
-        IConfiguration configuration = new DefaultConfiguration(  );
+        System.out.println( "\nFiltered " );
+        IConfiguration configuration = new DefaultConfiguration();
 
-        configuration.putValue( PDFCProperty.FILTER_PATTERNS,""
+        configuration.putValue( PDFCProperty.FILTER_PATTERNS, ""
                         //for removing all numbers that are not in a text
-                        +"\\s\\d+$|regexp|active\n"
+                        + "\\s\\d+$|regexp|active\n"
                         + "^\\d+\\s|regexp|active\n"
                         + "\\s\\d+\\s|regexp|active\n"
                         + "^\\d+$|regexp|active\n"
@@ -51,19 +50,20 @@ public class UseRegex {
         configuration.putValue( PDFCProperty.CONTINUOUS_FILTERS, "REGEXP" );
 
         showModifications( pdfComparer
-                                          .setConfiguration( configuration )
-                                          .compare( files[0], files[1] ) );
+                                           .setConfiguration( configuration )
+                                           .compare( files[0], files[1] ) );
     }
 
     /**
      * Show all modifications
+     *
      * @param result the result of the comparision of 2 PDF files
      */
-    public static void showModifications(final ResultModel result){
+    public static void showModifications( final ResultModel result ) {
         List<DiffGroup> differences = result.getDifferences( false );
         for( DiffGroup difference : differences ) {
             List<Modification> modifications = difference.getModifications();
-            if(modifications != null) {
+            if( modifications != null ) {
                 for( Modification modification : modifications ) {
                     System.out.println( "modification = " + modification );
                     modification.getModificationType();
@@ -87,7 +87,6 @@ public class UseRegex {
 
     /**
      * Returns a File object based on a string path
-     *
      * The file must not be null, must exist and must not be a directory
      *
      * @param file path to the file
