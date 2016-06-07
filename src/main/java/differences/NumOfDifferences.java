@@ -15,6 +15,11 @@ import java.io.IOException;
  */
 public class NumOfDifferences {
 
+    /**
+     * Start the sample, that show the difference/changes beetween 2 pdf files.
+     *
+     * @param args Expected 2 arguments, the path of the PDF files
+     */
     public static void main( String[] args ) {
         try {
             PDFC.requestAndSetTrialLicenseIfRequired();

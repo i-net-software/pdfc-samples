@@ -18,7 +18,11 @@ import java.util.List;
  */
 public class UseRegex {
 
-    // TODO : Javadoc
+    /**
+     * Start the sample, that show how using regular expressions for filtering which texts are to be compared.
+     *
+     * @param args Expected 2 arguments, the path of the PDF files
+     */
     public static void main( String[] args ) {
         try {
             PDFC.requestAndSetTrialLicenseIfRequired();

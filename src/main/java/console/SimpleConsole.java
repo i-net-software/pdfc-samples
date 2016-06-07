@@ -14,7 +14,11 @@ import java.io.IOException;
  */
 public class SimpleConsole {
 
-    // TODO : Javadoc
+    /**
+     * Start the sample, that uses the simplest logger: it logs to the system.out logstream.
+     *
+     * @param args Expected 2 arguments, the path of the PDF files
+     */
     public static void main( String[] args ) {
         try {
             PDFC.requestAndSetTrialLicenseIfRequired();

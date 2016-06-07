@@ -15,7 +15,11 @@ import java.io.IOException;
  */
 public class NumOfDifferencePageNumber{
 
-    // TODO : Javadoc
+    /**
+     * Start the sample, that show the difference in number of pages between 2 PDF files.
+     *
+     * @param args Expected 2 arguments, the path of the PDF files
+     */
     public static void main( String[] args ) {
         try {
             PDFC.requestAndSetTrialLicenseIfRequired();
@@ -24,7 +28,6 @@ public class NumOfDifferencePageNumber{
         }
 
         File[] files = getFileOfArguments( args );
-        PDFComparer pdfComparer = new PDFComparer();
 
         ResultModel result = new PDFComparer().compare( files[0], files[1] );
         InfoData infoData = result.getComparisonParameters();

@@ -18,7 +18,12 @@ import java.util.List;
  *
  */
 public class NumOfDifferencePerPage{
-    // TODO : Javadoc
+
+    /**
+     * Start the sample, that calculates the number of differences between 2 PDF files, grouped by page.
+     *
+     * @param args Expected 2 arguments, the path of the PDF files
+     */
     public static void main( String[] args ) {
         try {
             PDFC.requestAndSetTrialLicenseIfRequired();

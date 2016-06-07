@@ -21,6 +21,14 @@ import java.io.OutputStream;
  */
 public class CompareAndExportToSpecificFilename {
 
+    /**
+     * Start the sample, that show how export to pdf file the comparing between 2 PDF Files,
+     * for the case to change the export path.
+     *
+     * @param args Expected 3 arguments, the path of the 2 pdf files that will be compared.
+     * At least arguments the path for the export file. If no export file exist,
+     * it will be create a new file.
+     */
     public static void main( String[] args ) {
         try {
             PDFC.requestAndSetTrialLicenseIfRequired();

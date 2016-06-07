@@ -17,7 +17,12 @@ import java.util.List;
  * Expected 2 arguments, the path of the PDF files
  */
 public class OutputSpecifyModifyTypes {
-    // TODO - add Javadoc
+
+    /**
+     * Start the sample, that show the modifications between 2 PDF files in a type-sorted list.
+     *
+     * @param args Expected 2 arguments, the path of the PDF files
+     */
     public static void main( String[] args ) {
         try {
             PDFC.requestAndSetTrialLicenseIfRequired();
