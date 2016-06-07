@@ -18,7 +18,7 @@ import java.io.IOException;
  * with some print settings
  * Expected 2 arguments, the path of the PDF files
  */
-public class CompareAndPrint {
+public class CompareAndPrintWithPrintsetting {
 
     /**
      * Start the sample, to show the printing function of the result of comparison between 2 PDF files
