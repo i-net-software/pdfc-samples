@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * A simple sample for using regular expressions for filtering which texts are to be compared.
  *
- * Expected 2 arguments, the path of the PDF files
+ * Expects 2 arguments - the paths of the PDF files
  */
 public class UseRegex {
 

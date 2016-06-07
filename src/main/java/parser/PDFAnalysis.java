@@ -12,12 +12,13 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * A sample to show pdf datas
+ * A sample to show the internal PDF data structure
  *
- * Expected 2 arguments, the path of the pdf files
+ * Expected 2 arguments, the path of the PDF files
  */
-public class PDFAnalyse {
+public class PDFAnalysis {
 
+    // TODO : Javadoc
     public static void main( String[] args ) {
         try {
             PDFC.requestAndSetTrialLicenseIfRequired();
@@ -49,10 +50,10 @@ public class PDFAnalyse {
     }
 
     /**
-     * Get 2 Files back, that was checked
+     * Get 2 files that are to be checked for comparisons
      *
      * @param args the arguments
-     * @return 2 Files
+     * @return 2 files to compare
      */
     public static File[] getFileOfArguments(final String[] args){
         if (args == null || args.length != 2) {
@@ -62,12 +63,12 @@ public class PDFAnalyse {
     }
 
     /**
-     * For get a File-Object out a String-Path
+     * Returns a File object based on a string path
      *
-     * Check for null, exists and directory
+     * The file must not be null, must exist and must not be a directory
      *
-     * @param file Path for the File
-     * @return The Fileobject
+     * @param file path to the file
+     * @return The File object
      */
     public static File checkAndGetFile( final String file){
         if(file == null){
@@ -79,7 +80,7 @@ public class PDFAnalyse {
             throw new IllegalArgumentException( "The file didn't exist.\n parameter = " + file );
         }
         if( fileObject.isDirectory()){
-            throw new IllegalArgumentException( "The file is a folder and not a pdf file.\n parameter = " + file );
+            throw new IllegalArgumentException( "The file is a folder and not a PDF file.\n parameter = " + file );
         }
 
         return  fileObject;

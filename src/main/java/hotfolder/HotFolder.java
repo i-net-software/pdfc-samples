@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * a Java app which watches a folder for file changes and automatically compares new PDFs.
+ * A Java app which watches a folder for file changes and automatically compares new PDFs.
  * The idea is that any time two PDFs are added to the folder, we will run a simple comparison of the two
  * PDFs using i-net PDFC, create a report of the comparison and store it in a "reports" folder, and move
  * the source PDFs to a source archive folder.

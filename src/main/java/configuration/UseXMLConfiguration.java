@@ -16,7 +16,7 @@ import java.util.InvalidPropertiesFormatException;
 /**
  * A sample to show, how use a PDFC-Config XML-File.
  *
- * Expected 3 arguments, the first 2 arguments for the path of the PDF files and the last one
+ * Expects 3 arguments - the first 2 arguments for the paths of the PDF files to be compared and the last one
  * for the XML config file.
  */
 public class UseXMLConfiguration {

@@ -12,13 +12,14 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * A simple sample for printing the result for the comparing between 2 PDF Files
+ * A simple sample for printing the result of the comparison of 2 PDF Files
  *
- * Expected 2 arguments, the path of the pdf files
+ * Expected 2 arguments, the path of the PDF files
  *
  */
 public class SimpleCompareAndPrint {
 
+    // TODO : Javadoc
     public static void main( String[] args ) {
         try {
             PDFC.requestAndSetTrialLicenseIfRequired();
@@ -31,7 +32,7 @@ public class SimpleCompareAndPrint {
         //Used the current i-net PDFC configuration. If no configuration has been previously set then the default configuration will be used.
 
         //set up Printer service
-        PrintService printService = PrintServiceLookup.lookupDefaultPrintService(); //use the default printservice, for testing purpose it makes sense to use a virtual printer!
+        PrintService printService = PrintServiceLookup.lookupDefaultPrintService(); //use the default printservice, for testing purposes it makes sense to use a virtual printer!
         PrintRequestAttributeSet attributes = new HashPrintRequestAttributeSet();
 
         new PDFComparer()
@@ -40,7 +41,7 @@ public class SimpleCompareAndPrint {
     }
 
     /**
-     * Get 2 files back that are to be checked for comparisons
+     * Get 2 files that are to be checked for comparisons
      *
      * @param args the arguments
      * @return 2 files to compare
@@ -57,8 +58,8 @@ public class SimpleCompareAndPrint {
      *
      * The file must not be null, must exist and must not be a directory
      *
-     * @param file Path to the File
-     * @return The Fileobject
+     * @param file path to the file
+     * @return The File object
      */
     public static File checkAndGetFile( final String file){
         if(file == null){
@@ -70,7 +71,7 @@ public class SimpleCompareAndPrint {
             throw new IllegalArgumentException( "The file didn't exist.\n parameter = " + file );
         }
         if( fileObject.isDirectory()){
-            throw new IllegalArgumentException( "The file is a folder and not a pdf file.\n parameter = " + file );
+            throw new IllegalArgumentException( "The file is a folder and not a PDF file.\n parameter = " + file );
         }
 
         return  fileObject;
