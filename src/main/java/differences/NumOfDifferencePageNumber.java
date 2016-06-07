@@ -25,10 +25,16 @@ public class NumOfDifferencePageNumber{
         File[] files = getFileOfArguments( args );
         PDFComparer pdfComparer = new PDFComparer();
 
-        ResultModel result = pdfComparer.compare( files[0], files[1] );
-        InfoData comparisonParameters = result.getComparisonParameters();
+        ResultModel result = new PDFComparer().compare( files[0], files[1] );
+        InfoData infoData = result.getComparisonParameters();
 
-        int differencePageNumber = comparisonParameters.getFirstTotalPageNumber() - comparisonParameters.getSecondTotalPageNumber();
+        int firstTotalPageNumber = infoData.getFirstTotalPageNumber();
+        int secondTotalPageNumber = infoData.getSecondTotalPageNumber();
+        System.out.println( "firstTotalPageNumber = " + firstTotalPageNumber );
+        System.out.println( "secondTotalPageNumber = " + secondTotalPageNumber );
+
+        int differencePageNumber = firstTotalPageNumber - secondTotalPageNumber;
+
         System.out.println( "difference page number = " + differencePageNumber );
     }
 
