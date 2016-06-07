@@ -12,12 +12,13 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * A simple sample for using regex.
+ * A simple sample for using regular expressions for filtering which texts are to be compared.
  *
- * Expected 2 arguments, the path of the pdf files
+ * Expected 2 arguments, the path of the PDF files
  */
 public class UseRegex {
 
+    // TODO : Javadoc
     public static void main( String[] args ) {
         try {
             PDFC.requestAndSetTrialLicenseIfRequired();
@@ -40,21 +41,21 @@ public class UseRegex {
                         //filtered date in format YYYY mm dd and dd mm YYYY
                         + "((19|20)\\d\\d([- /.])(0[1-9]|1[012])([- /.])(0[1-9]|[12][0-9]|3[01]))|regexp|active\n"
                         + "((0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d)|regexp|active\n"
-                        //filtered lenght unit
+                        //filtered length unit
                         + "\\s(mm|cm|dm|m|km)|regexp|active\n"
         );
         configuration.putValue( PDFCProperty.CONTINUOUS_FILTERS, "REGEXP" );
 
-        showModification( pdfComparer
+        showModifications( pdfComparer
                                           .setConfiguration( configuration )
                                           .compare( files[0], files[1] ) );
     }
 
     /**
-     * Show alle modification
-     * @param result the result of comparision 2 pdf files
+     * Show all modifications
+     * @param result the result of the comparision of 2 PDF files
      */
-    public static void showModification(final ResultModel result){
+    public static void showModifications(final ResultModel result){
         List<DiffGroup> differences = result.getDifferences( false );
         for( DiffGroup difference : differences ) {
             List<Modification> modifications = difference.getModifications();
@@ -68,7 +69,7 @@ public class UseRegex {
     }
 
     /**
-     * Get 2 files back that are to be checked for comparisons
+     * Get 2 files that are to be checked for comparisons
      *
      * @param args the arguments
      * @return 2 files to compare
@@ -85,8 +86,8 @@ public class UseRegex {
      *
      * The file must not be null, must exist and must not be a directory
      *
-     * @param file Path to the File
-     * @return The Fileobject
+     * @param file path to the file
+     * @return The File object
      */
     public static File checkAndGetFile( final String file ) {
         if( file == null ) {
@@ -98,7 +99,7 @@ public class UseRegex {
             throw new IllegalArgumentException( "The file didn't exist.\n parameter = " + file );
         }
         if( fileObject.isDirectory() ) {
-            throw new IllegalArgumentException( "The file is a folder and not a pdf file.\n parameter = " + file );
+            throw new IllegalArgumentException( "The file is a folder and not a PDF file.\n parameter = " + file );
         }
 
         return fileObject;

@@ -14,6 +14,7 @@ import java.io.IOException;
  */
 public class SimpleConsole {
 
+    // TODO : Javadoc
     public static void main( String[] args ) {
         try {
             PDFC.requestAndSetTrialLicenseIfRequired();
@@ -28,7 +29,7 @@ public class SimpleConsole {
     }
 
     /**
-     * Get 2 files back that are to be checked for comparisons
+     * Get 2 files that are to be checked for comparisons
      *
      * @param args the arguments
      * @return 2 files to compare
@@ -45,8 +46,8 @@ public class SimpleConsole {
      *
      * The file must not be null, must exist and must not be a directory
      *
-     * @param file Path to the File
-     * @return The Fileobject
+     * @param file path to the file
+     * @return The File object
      */
     public static File checkAndGetFile( final String file){
         if(file == null){

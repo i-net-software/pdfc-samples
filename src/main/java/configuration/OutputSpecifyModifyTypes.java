@@ -13,11 +13,12 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * A sample to show the modification between 2 pdf files in a type-sorted list.
+ * A sample to show the modifications between 2 PDF files in a type-sorted list.
  *
- * Expected 2 arguments, the path of the pdf files
+ * Expected 2 arguments, the path of the PDF files
  */
 public class OutputSpecifyModifyTypes {
+    // TODO - add Javadoc
     public static void main( String[] args ) {
         try {
             PDFC.requestAndSetTrialLicenseIfRequired();
@@ -29,24 +30,24 @@ public class OutputSpecifyModifyTypes {
         PDFComparer pdfComparer = new PDFComparer();
         IConfiguration configuration = new DefaultConfiguration(  );
 
-        System.out.println("all modify texts");
+        System.out.println("all modified texts");
         configuration.putValue( PDFCProperty.CONTINUOUS_COMPARE_TYPES, "" + CompareType.TEXT );
-        showModification( pdfComparer.setConfiguration( configuration ).compare( files[0], files[1] ) );
+        showModifications( pdfComparer.setConfiguration( configuration ).compare( files[0], files[1] ) );
 
-        System.out.println("\nall modify lines");
+        System.out.println("\nall modified lines");
         configuration.putValue( PDFCProperty.CONTINUOUS_COMPARE_TYPES, "" + CompareType.LINE );
-        showModification( pdfComparer.setConfiguration( configuration ).compare( files[0], files[1] ) );
+        showModifications( pdfComparer.setConfiguration( configuration ).compare( files[0], files[1] ) );
 
-        System.out.println("\nall modify images");
+        System.out.println("\nall modified images");
         configuration.putValue( PDFCProperty.CONTINUOUS_COMPARE_TYPES, "" + CompareType.IMAGE );
-        showModification( pdfComparer.setConfiguration( configuration ).compare( files[0], files[1] ) );
+        showModifications( pdfComparer.setConfiguration( configuration ).compare( files[0], files[1] ) );
     }
 
     /**
-     * Show alle modification
-     * @param result the result of comparision 2 pdf files
+     * Show all modifications
+     * @param result the result of the comparision of the 2 PDF files
      */
-    public static void showModification(final ResultModel result){
+    public static void showModifications(final ResultModel result){
         List<DiffGroup> differences = result.getDifferences( false );
 
         for( DiffGroup difference : differences ) {
@@ -61,7 +62,7 @@ public class OutputSpecifyModifyTypes {
     }
 
     /**
-     * Get 2 files back that are to be checked for comparisons
+     * Get 2 files that are to be checked for comparisons
      *
      * @param args the arguments
      * @return 2 files to compare
@@ -78,8 +79,8 @@ public class OutputSpecifyModifyTypes {
      *
      * The file must not be null, must exist and must not be a directory
      *
-     * @param file Path to the File
-     * @return The Fileobject
+     * @param file path to the file
+     * @return The File object
      */
     public static File checkAndGetFile( final String file){
         if(file == null){
@@ -91,7 +92,7 @@ public class OutputSpecifyModifyTypes {
             throw new IllegalArgumentException( "The file didn't exist.\n parameter = " + file );
         }
         if( fileObject.isDirectory()){
-            throw new IllegalArgumentException( "The file is a folder and not a pdf file.\n parameter = " + file );
+            throw new IllegalArgumentException( "The file is a folder and not a PDF file.\n parameter = " + file );
         }
         return fileObject;
     }
