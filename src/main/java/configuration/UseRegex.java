@@ -31,9 +31,18 @@ public class UseRegex {
         System.out.println( "\nFiltered "  );
         IConfiguration configuration = new DefaultConfiguration(  );
 
-        //remove all number text changes (for example page number)
-        configuration.putValue( PDFCProperty.FILTER_PATTERNS,
-                        "[0-9]|regexp|active\n" );
+        configuration.putValue( PDFCProperty.FILTER_PATTERNS,""
+                        //for removing all numbers that are not in a text
+                        +"\\s\\d+$|regexp|active\n"
+                        + "^\\d+\\s|regexp|active\n"
+                        + "\\s\\d+\\s|regexp|active\n"
+                        + "^\\d+$|regexp|active\n"
+                        //filtered date in format YYYY mm dd and dd mm YYYY
+                        + "((19|20)\\d\\d([- /.])(0[1-9]|1[012])([- /.])(0[1-9]|[12][0-9]|3[01]))|regexp|active\n"
+                        + "((0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d)|regexp|active\n"
+                        //filtered lenght unit
+                        + "\\s(mm|cm|dm|m|km)|regexp|active\n"
+        );
         configuration.putValue( PDFCProperty.CONTINUOUS_FILTERS, "REGEXP" );
 
         showModification( pdfComparer
