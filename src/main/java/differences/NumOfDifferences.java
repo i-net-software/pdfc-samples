@@ -8,10 +8,9 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- *  A sample to show the difference/changes beetween 2 pdf files.
+ *  A sample to show the difference/changes beetween 2 PDF files.
  *
- *  Expected 2 arguments, the path of the pdf files
- *
+ *  Expects 2 arguments - the paths of the PDF files
  */
 public class NumOfDifferences {
 
@@ -37,7 +36,7 @@ public class NumOfDifferences {
     }
 
     /**
-     * Get 2 files back that are to be checked for comparisons
+     * Get 2 files that are to be checked for comparisons
      *
      * @param args the arguments
      * @return 2 files to compare
@@ -54,8 +53,8 @@ public class NumOfDifferences {
      *
      * The file must not be null, must exist and must not be a directory
      *
-     * @param file Path to the File
-     * @return The Fileobject
+     * @param file path to the file
+     * @return The File object
      */
     public static File checkAndGetFile( final String file){
         if(file == null){
@@ -67,7 +66,7 @@ public class NumOfDifferences {
             throw new IllegalArgumentException( "The file didn't exist.\n parameter = " + file );
         }
         if( fileObject.isDirectory()){
-            throw new IllegalArgumentException( "The file is a folder and not a pdf file.\n parameter = " + file );
+            throw new IllegalArgumentException( "The file is a folder and not a PDF file.\n parameter = " + file );
         }
 
         return  fileObject;

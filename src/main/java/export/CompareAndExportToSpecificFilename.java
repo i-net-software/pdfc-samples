@@ -10,14 +10,14 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * A sample for export to pdf file the comparing between 2 PDF Files,
- * for the case to change the export path.
+ * A sample for exporting the result of a comparison of 2 PDF Files to a PDF,
+ * showing how to set the export path for this comparison report.
  *
- * Expected 3 arguments, the path of the 2 pdf files that will be compared.
- * At least arguments the path for the export file. If no export file exist,
- * it will be create a new file.
+ * Expects 2 or 3 arguments: the paths of the 2 PDF files that will be compared,
+ * and optionally the path for the export file. If no export file exists,
+ * a new file will be created.
  *
- * Similar to ReportingToSpecificFilename
+ * See the ReportingToSpecificFilename sample for an additional sample along these lines.
  */
 public class CompareAndExportToSpecificFilename {
 
@@ -48,14 +48,12 @@ public class CompareAndExportToSpecificFilename {
                         .compare( files[1], files[0] );
     }
 
-
+    // TODO : Javadoc
     public static class PersonalDifferencesPDFPresenter extends DifferencesPDFPresenter{
 
-        /**
-         * Export File
-         */
         private File exportFile  = null;
 
+        // TODO : Javadoc
         public PersonalDifferencesPDFPresenter(  File export ) {
             super( null );
             exportFile =  export;
@@ -94,8 +92,8 @@ public class CompareAndExportToSpecificFilename {
      *
      * The file must not be null, must exist and must not be a directory
      *
-     * @param file Path to the File
-     * @return The Fileobject
+     * @param file path to the file
+     * @return The File object
      */
     public static File checkAndGetFile( final String file){
         if(file == null){
@@ -107,12 +105,13 @@ public class CompareAndExportToSpecificFilename {
             throw new IllegalArgumentException( "The file didn't exist.\n parameter = " + file );
         }
         if( fileObject.isDirectory()){
-            throw new IllegalArgumentException( "The file is a folder and not a pdf file.\n parameter = " + file );
+            throw new IllegalArgumentException( "The file is a folder and not a PDF file.\n parameter = " + file );
         }
 
         return  fileObject;
     }
 
+    // TODO : Javadoc
     public static File checkAndCreateFile( final String file){
         final File fileObject = new File( file );
 
@@ -124,7 +123,7 @@ public class CompareAndExportToSpecificFilename {
         }
 
         if( fileObject.isDirectory()){
-            throw new IllegalArgumentException( "The file is a folder and not a pdf file.\n parameter = " + file );
+            throw new IllegalArgumentException( "The file is a folder and not a PDF file.\n parameter = " + file );
         }
 
         return  fileObject;

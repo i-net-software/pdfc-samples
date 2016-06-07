@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * A sample for JUnit-testcases
+ * A sample for writing JUnit test cases using PDFC
  */
 public class CompareTest {
 
@@ -30,7 +30,7 @@ public class CompareTest {
     }
 
     @Test
-    public void testDifference(){
+    public void testDifferences(){
 
         File example1 =  new File(getClass().getResource( "Example1.pdf" ).getFile());
         File example2 =  new File(getClass().getResource( "Example2.pdf" ).getFile());

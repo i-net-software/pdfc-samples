@@ -8,12 +8,13 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * A simple sample for export to pdf file the comparing between 2 PDF Files
+ * A simple sample for exporting the results of the comparison of 2 PDF Files to a PDF.
  *
- * Expected 2 arguments, the path of the pdf files
+ * Expects 2 arguments - the paths of the PDF files to be compared
  */
 public class SimpleCompareAndExport{
 
+    // TODO : Javadoc
     public static void main( String[] args ) {
         try {
             PDFC.requestAndSetTrialLicenseIfRequired();
@@ -31,7 +32,7 @@ public class SimpleCompareAndExport{
     }
 
     /**
-     * Get 2 files back that are to be checked for comparisons
+     * Get 2 files that are to be checked for comparisons
      *
      * @param args the arguments
      * @return 2 files to compare
@@ -61,7 +62,7 @@ public class SimpleCompareAndExport{
             throw new IllegalArgumentException( "The file didn't exist.\n parameter = " + file );
         }
         if( fileObject.isDirectory()){
-            throw new IllegalArgumentException( "The file is a folder and not a pdf file.\n parameter = " + file );
+            throw new IllegalArgumentException( "The file is a folder and not a PDF file.\n parameter = " + file );
         }
 
         return  fileObject;

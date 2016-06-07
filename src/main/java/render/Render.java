@@ -18,14 +18,15 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * A sample to show the render function with a simplify marker function.
+ * A sample to show the PDF render function with a simple function for displayer markers where differences are detected.
  *
- * Expected 2 arguments, the path of the pdf files
+ * Expected 2 arguments, the path of the PDF files
  */
 public class Render {
 
     private JFrame frame;
 
+    // TODO : Javadoc
     public static void main( String[] args ) {
         try {
             PDFC.requestAndSetTrialLicenseIfRequired();
@@ -37,6 +38,7 @@ public class Render {
         new Render( files ).show();
     }
 
+    // TODO : Javadoc
     public Render(final File[] files){
         PDFComparer pdfComparer = new PDFComparer();
         ResultModel compare = pdfComparer.compare( files[0], files[1] );
@@ -53,17 +55,18 @@ public class Render {
         }
     }
 
-    public void show(){
+    // TODO : Javadoc
+    public void show() {
         frame.setVisible( true );
     }
 
     /**
      * To show one PDF file.
      *
-     * Every click go to the next page,
-     * if no next page exist it is start at page 1
+     * Every click goes to the next page,
+     * if no next page exists, it returns to page 1
      *
-     * Every changes is with a blue transparent color marked
+     * Every change is marked with a blue transparent color
      * over the line.
      */
     public class PDFViewer extends JComponent{
@@ -72,14 +75,15 @@ public class Render {
         private ResultModel compare;
         private final int maxPageNumber;
 
+        // TODO : Javadoc
         public PDFViewer(final ResultModel compare) throws IOException {
             this.compare = compare;
             maxPageNumber = compare.getComparisonParameters().getFirstFile().getContent().getNumPages();
             addMouseListener( new MouseListener() {
                 /**
-                 * For every click, it switch to the next page,
-                 * if no next page exist it start at the start page
-                 * @param e
+                 * Every click goes to the next page,
+                 * if no next page exists, it returns to page 1
+                 * @param e mouse event
                  */
                 @Override
                 public void mouseClicked( MouseEvent e ) {
@@ -110,7 +114,7 @@ public class Render {
             Graphics2D g2d = (Graphics2D) g;
 
             ResultPage page = compare.getPage( currentPageIndex, true );
-            //draw the pdf file, alternative: page.renderPage(1.0, g2d  );
+            //draw the PDF file, alternative: page.renderPage(1.0, g2d  );
             BufferedImage pageImage = page.getPageImage( 1.0 );
             g2d.drawImage( pageImage, 0,0, null );
 
@@ -127,10 +131,10 @@ public class Render {
         }
 
         /**
-         * Check the modification for the relevant for the current page.
+         * Check the modifications found for the current page.
          *
-         * @param modifications a list with modification
-         * @return true the modification is for the current page relevant, false if it no modification for the current page
+         * @param modifications a list with modifications
+         * @return true the modification is for the current page, false if it is no modification for the current page
          */
         private boolean hasChangesForThisPage(final List<Modification> modifications){
             if(modifications == null) {
@@ -160,10 +164,10 @@ public class Render {
 
 
     /**
-     * Get 2 Files back, that was checked
+     * Get 2 files that are to be checked for comparisons
      *
      * @param args the arguments
-     * @return 2 Files
+     * @return 2 files to compare
      */
     public static File[] getFileOfArguments(final String[] args){
         if (args == null || args.length != 2) {
@@ -173,12 +177,12 @@ public class Render {
     }
 
     /**
-     * For get a File-Object out a String-Path
+     * Returns a File object based on a string path
      *
-     * Check for null, exists and directory
+     * The file must not be null, must exist and must not be a directory
      *
-     * @param file Path for the File
-     * @return The Fileobject
+     * @param file path to the file
+     * @return The File object
      */
     public static File checkAndGetFile( final String file){
         if(file == null){
@@ -190,7 +194,7 @@ public class Render {
             throw new IllegalArgumentException( "The file didn't exist.\n parameter = " + file );
         }
         if( fileObject.isDirectory()){
-            throw new IllegalArgumentException( "The file is a folder and not a pdf file.\n parameter = " + file );
+            throw new IllegalArgumentException( "The file is a folder and not a PDF file.\n parameter = " + file );
         }
 
         return  fileObject;
