@@ -1,12 +1,16 @@
-# pdfc-samples
+# PDFC-Samples
 
-Provides Java-samples for the API-usage of the [i-net PDF Content Comparer](https://www.inetsoftware.de/products/pdf-content-comparer "i-net PDF Content Comparer"). 
-The samples cover a range from simple examples for basic comparison process to examples of configuration usage and report generation. 
+This project provides code samples for the API-usage of the [i-net PDF Content Comparer](https://www.inetsoftware.de/products/pdf-content-comparer "i-net PDF Content Comparer"). 
+The samples are all written in Java and contain numerous examples for 
 
 * Basic comparison procedure calls
-* Configuration usages, Filter settings 
-* Comparison report generation
-* Parser usage
+* Analysis of the comparison results
+* Customization of the comparison parameters by use of configuration settings
+* Use of filters to control the comparison input  
+* Generation of comparison reports with different format and layout
+* Usage of the PDF Parser to inspect PDF documents 
+
+To run the example projects, you need to have a Java Runtime Version 8 or higher installed. 
 
 # Installation
 
