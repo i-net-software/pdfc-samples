@@ -1,4 +1,4 @@
-package configuration;
+package parser;
 
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;

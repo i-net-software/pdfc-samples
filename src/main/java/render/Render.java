@@ -1,4 +1,4 @@
-package configuration;
+package render;
 
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
