@@ -4,6 +4,7 @@ import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.config.*;
 import com.inet.pdfc.presenter.DifferencesPrintPresenter;
+import com.inet.pdfc.presenter.ReportPDFPresenter;
 
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
@@ -42,14 +43,10 @@ public class UseXMLConfiguration {
             e.printStackTrace();
         }
 
-        PrintService printService = PrintServiceLookup
-                        .lookupDefaultPrintService(); //use the default printservice, for testing purpose it makes sense to use a virtual printer!
-        PrintRequestAttributeSet attributes = new HashPrintRequestAttributeSet();
-
         new PDFComparer()
                         .setConfiguration( configuration )
-                        .addPresenter( new DifferencesPrintPresenter( printService, attributes ) )
-                        .compare( files[1], files[0] );
+                        .addPresenter( new ReportPDFPresenter(false, true, files[0].getParentFile()) )
+                        .compare( files[0], files[1] );
     }
 
     /**

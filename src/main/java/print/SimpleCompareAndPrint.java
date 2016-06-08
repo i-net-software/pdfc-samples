@@ -40,7 +40,7 @@ public class SimpleCompareAndPrint {
 
         new PDFComparer()
                         .addPresenter( new DifferencesPrintPresenter( printService, attributes ) )
-                        .compare( files[1], files[0] );
+                        .compare( files[0], files[1] );
     }
 
     /**

@@ -42,7 +42,7 @@ public class CompareAndExportToSpecificFilename {
 
         new PDFComparer()
                         .addPresenter( differencesPDFPresenter )
-                        .compare( files[1], files[0] );
+                        .compare( files[0], files[1] );
     }
 
     /**

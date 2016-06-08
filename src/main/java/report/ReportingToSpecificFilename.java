@@ -41,7 +41,7 @@ public class ReportingToSpecificFilename {
 
         new PDFComparer()
                         .addPresenter( reportPDFPresenter )
-                        .compare( files[1], files[0] );
+                        .compare( files[0], files[1] );
     }
 
     /**
