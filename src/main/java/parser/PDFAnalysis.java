@@ -2,9 +2,7 @@ package parser;
 
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
-import com.inet.pdfc.model.Document;
-import com.inet.pdfc.model.DrawableElement;
-import com.inet.pdfc.model.Page;
+import com.inet.pdfc.model.*;
 import com.inet.pdfc.results.ResultModel;
 
 import java.io.File;
@@ -43,7 +41,21 @@ public class PDFAnalysis {
 
                 List<DrawableElement> list = page.getElementList().getList();
                 for( DrawableElement drawableElement : list ) {
-                    System.out.println( "Type = " + drawableElement.getType() + "\t\t" + drawableElement );
+                    System.out.println( "Type = " + drawableElement.getType() + "\t\t" + drawableElement + "\t" + drawableElement.getClass());
+                    switch( drawableElement.getType() ){
+                        case Text:
+                            TextElement textElement = (TextElement)drawableElement;
+                            System.out.println( "textElement = " + textElement );
+                            break;
+                        case Shape:
+                            ShapeElement shapeElement = (ShapeElement)drawableElement;
+                            System.out.println( "shapeElement = " + shapeElement );
+                            break;
+                        case Image:
+                            ImageElement imageElement = (ImageElement)drawableElement;
+                            System.out.println( "imageElement = " + imageElement );
+                            break;
+                    }
                 }
 
             }
