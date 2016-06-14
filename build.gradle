@@ -119,7 +119,7 @@ task runReportingToSpecificFilename(type:JavaExec) {
     description 'Runs sample ReportingToSpecificFilename'
     dependsOn 'build'
     main = 'report.ReportingToSpecificFilename'
-    args file("${sourceSets.main.output.resourcesDir}/Example1.pdf"), file("${sourceSets.main.output.resourcesDir}/Example2.pdf")
+    args file("${sourceSets.main.output.resourcesDir}/Example1.pdf"), file("${sourceSets.main.output.resourcesDir}/Example2.pdf"), file('output.pdf')
     classpath = files(sourceSets.main.runtimeClasspath, sourceSets.main.output.resourcesDir)
 }
 
