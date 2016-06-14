@@ -8,8 +8,8 @@ repositories {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'junit:junit:4.10'
-} 
+    testCompile 'junit:junit:4.10'
+}
 if (!file('libs/PDFC.jar').exists() || !file('libs/inetcore.jar').exists() || 
     !file('plugins/reporting.zip').exists() || !file('plugins/pdfparserplugin.zip').exists()) {
     ant.fail('Please first download the i-net PDFC SDK at https://download.inetsoftware.de/pdfc-sdk-latest.zip and place:\n'+
@@ -84,13 +84,6 @@ task runHotFolder(type:JavaExec) {
     description 'Runs sample HotFolder'
     dependsOn 'build'
     main = 'hotfolder.HotFolder'
-    args file("${sourceSets.main.output.resourcesDir}/Example1.pdf"), file("${sourceSets.main.output.resourcesDir}/Example2.pdf")
-    classpath = files(sourceSets.main.runtimeClasspath, sourceSets.main.output.resourcesDir)
-}
-task runCompareTest(type:JavaExec) {
-    description 'Runs sample CompareTest'
-    dependsOn 'build'
-    main = 'junit.CompareTest'
     args file("${sourceSets.main.output.resourcesDir}/Example1.pdf"), file("${sourceSets.main.output.resourcesDir}/Example2.pdf")
     classpath = files(sourceSets.main.runtimeClasspath, sourceSets.main.output.resourcesDir)
 }
