@@ -2,6 +2,7 @@ package export;
 
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
+import com.inet.pdfc.presenter.BasePresenter;
 import com.inet.pdfc.presenter.DifferencesPDFPresenter;
 
 import java.io.File;
@@ -60,6 +61,16 @@ public class CompareAndExportToSpecificFilename {
         public PersonalDifferencesPDFPresenter( File export ) {
             super( null );
             exportFile = export;
+        }
+
+        /**
+         * Needed for async comparision
+         *
+         * @param spawnWithParent
+         * @return a copy of this
+         */
+        public BasePresenter spawn( boolean spawnWithParent ) {
+            return new PersonalDifferencesPDFPresenter( exportFile );
         }
 
         /**
