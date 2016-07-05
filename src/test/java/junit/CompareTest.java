@@ -32,8 +32,8 @@ public class CompareTest {
     @Test
     public void testDifferences() {
 
-        File example1 = new File( getClass().getResource( "Example1.pdf" ).getFile() );
-        File example2 = new File( getClass().getResource( "Example2.pdf" ).getFile() );
+        File example1 = new File( getClass().getResource( "/Example1.pdf" ).getFile() );
+        File example2 = new File( getClass().getResource( "/Example2.pdf" ).getFile() );
 
         ResultModel result = pdfComparer.compare( example1, example2 );
         InfoData comparisonParameters = result.getComparisonParameters();

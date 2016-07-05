@@ -22,3 +22,5 @@ plugins/*
 .gradle
 
 *.iml
+output.pdf
+srvlog*
