@@ -2,7 +2,9 @@ package print;
 
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
+import com.inet.pdfc.config.FilePdfSource;
 import com.inet.pdfc.presenter.DifferencesPrintPresenter;
+import com.inet.pdfc.results.ResultModel;
 
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
@@ -12,6 +14,8 @@ import javax.print.attribute.standard.MediaSizeName;
 import javax.print.attribute.standard.OrientationRequested;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 /**
  * A sample for printing the result of the comparison of 2 PDF files
@@ -46,9 +50,19 @@ public class CompareAndPrintWithPrintsetting {
         //select orientation landscape
         attributes.add( OrientationRequested.PORTRAIT );
 
-        new PDFComparer()
-                        .addPresenter( new DifferencesPrintPresenter( printService, attributes ) )
-                        .compare( files[0], files[1] );
+        CompletableFuture<ResultModel> resultModelCompletableFuture =
+                        new PDFComparer().compareAsync( new FilePdfSource( files[0] ), new FilePdfSource( files[1] ) );
+
+        try {
+            ResultModel resultModel = resultModelCompletableFuture.get();
+            new DifferencesPrintPresenter( printService, attributes ).executeImmediately( resultModel );
+        } catch( InterruptedException e ) {
+            e.printStackTrace();
+        } catch( ExecutionException e ) {
+            e.printStackTrace();
+        } catch( Exception e ) {
+            e.printStackTrace();
+        }
     }
 
     /**
