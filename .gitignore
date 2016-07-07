@@ -24,3 +24,5 @@ plugins/*
 *.iml
 output.pdf
 srvlog*
+/bin/*
+/bin/
