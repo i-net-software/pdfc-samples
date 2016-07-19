@@ -2,7 +2,9 @@ package report;
 
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
+import com.inet.pdfc.presenter.BasePresenter;
 import com.inet.pdfc.presenter.ReportPDFPresenter;
+import export.CompareAndExportToSpecificFilename;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -62,6 +64,16 @@ public class ReportingToSpecificFilename {
         public PersonalReportPDFPresenter( boolean detailed, boolean appendSettings, File export ) {
             super( detailed, appendSettings, null );
             exportFile = export;
+        }
+
+        /**
+         * Needed for async comparision
+         *
+         * @param spawnWithParent
+         * @return a copy of this
+         */
+        public BasePresenter spawn( boolean spawnWithParent ) {
+            return this;
         }
 
         /**
