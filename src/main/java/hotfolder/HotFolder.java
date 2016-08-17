@@ -37,6 +37,9 @@ public class HotFolder {
                 reportsFolder = args[i + 1];
             }
         }
+        if (sourceFolder.equals(archiveFolder) || sourceFolder.equals(reportsFolder)) {
+            throw new IllegalStateException("Source folder must be unique to avoid endless loops.");
+        }
         Path sourcePath = Paths.get( sourceFolder );
         Path archivePath = Paths.get( archiveFolder );
         Path reportsPath = Paths.get( reportsFolder );
