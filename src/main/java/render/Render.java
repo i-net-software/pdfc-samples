@@ -4,6 +4,7 @@ import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.generator.model.DiffGroup;
 import com.inet.pdfc.generator.model.Modification;
+import com.inet.pdfc.model.EnumerationProgress;
 import com.inet.pdfc.model.PagedElement;
 import com.inet.pdfc.results.ResultModel;
 import com.inet.pdfc.results.ResultPage;
@@ -95,7 +96,15 @@ public class Render {
          */
         public PDFViewer( final ResultModel compare ) throws IOException {
             this.compare = compare;
-            maxPageNumber = compare.getComparisonParameters().getFirstFile().getContent().getNumPages();
+
+            EnumerationProgress pages = compare.getComparisonParameters().getFirstFile().getContent().getPages( null, 0 );
+            int index = 0;
+            while( pages.hasMoreElements() ){
+                ++index;
+                pages.nextElement();
+            }
+
+            maxPageNumber = index;
             addMouseListener( new MouseListener() {
                 /**
                  * Every click goes to the next page,

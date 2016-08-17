@@ -7,6 +7,7 @@ import com.inet.pdfc.results.ResultModel;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.List;
 
 /**
@@ -33,11 +34,11 @@ public class PDFAnalysis {
 
         try {
             Document document = compare.getComparisonParameters().getFirstFile().getContent();
-            System.out.println( "number of pages = " + document.getNumPages() );
-
-            for( int i = 0; i < document.getNumPages(); ++i ) {
-                System.out.println( "\npage number = " + i );
-                Page page = document.getPage( i );
+            int index = 0;
+            Enumeration<Page> pages = document.getPages( null, index );
+            while( pages.hasMoreElements() ){
+                System.out.println( "\npage number = " + index++ );
+                Page page = pages.nextElement();
 
                 List<DrawableElement> list = page.getElementList().getList();
                 for( DrawableElement drawableElement : list ) {
@@ -57,8 +58,8 @@ public class PDFAnalysis {
                             break;
                     }
                 }
-
             }
+            System.out.println( "number of pages = " + index );
         } catch( IOException e ) {
             e.printStackTrace();
         }
