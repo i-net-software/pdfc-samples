@@ -47,7 +47,7 @@ public class UseRegex {
                         //filtered length unit
                         + "\\s(mm|cm|dm|m|km)|regexp|active\n"
         );
-        configuration.putValue( PDFCProperty.CONTINUOUS_FILTERS, "REGEXP" );
+        configuration.putValue( PDFCProperty.FILTERS, "REGEXP" );
 
         showModifications( pdfComparer
                                            .setConfiguration( configuration )
@@ -107,5 +107,4 @@ public class UseRegex {
 
         return fileObject;
     }
-
 }

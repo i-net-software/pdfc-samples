@@ -34,15 +34,15 @@ public class OutputSpecifyModifyTypes {
         IConfiguration configuration = new DefaultConfiguration();
 
         System.out.println( "all modified texts" );
-        configuration.putValue( PDFCProperty.CONTINUOUS_COMPARE_TYPES, "" + CompareType.TEXT );
+        configuration.putValue( PDFCProperty.COMPARE_TYPES, "" + CompareType.TEXT );
         showModifications( pdfComparer.setConfiguration( configuration ).compare( files[0], files[1] ) );
 
         System.out.println( "\nall modified lines" );
-        configuration.putValue( PDFCProperty.CONTINUOUS_COMPARE_TYPES, "" + CompareType.LINE );
+        configuration.putValue( PDFCProperty.COMPARE_TYPES, "" + CompareType.LINE );
         showModifications( pdfComparer.setConfiguration( configuration ).compare( files[0], files[1] ) );
 
         System.out.println( "\nall modified images" );
-        configuration.putValue( PDFCProperty.CONTINUOUS_COMPARE_TYPES, "" + CompareType.IMAGE );
+        configuration.putValue( PDFCProperty.COMPARE_TYPES, "" + CompareType.IMAGE );
         showModifications( pdfComparer.setConfiguration( configuration ).compare( files[0], files[1] ) );
     }
 
