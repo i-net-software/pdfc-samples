@@ -2,6 +2,7 @@ package junit;
 
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
+import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.generator.message.InfoData;
 import com.inet.pdfc.results.ResultModel;
 import org.junit.Assert;
@@ -30,7 +31,7 @@ public class CompareTest {
     }
 
     @Test
-    public void testDifferences() {
+    public void testDifferences() throws PdfcException {
 
         File example1 = new File( getClass().getResource( "/Example1.pdf" ).getFile() );
         File example2 = new File( getClass().getResource( "/Example2.pdf" ).getFile() );
