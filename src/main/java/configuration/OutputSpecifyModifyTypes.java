@@ -3,6 +3,7 @@ package configuration;
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.config.*;
+import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.generator.model.DiffGroup;
 import com.inet.pdfc.generator.model.Modification;
 import com.inet.pdfc.results.ResultModel;
@@ -31,19 +32,22 @@ public class OutputSpecifyModifyTypes {
 
         File[] files = getFileOfArguments( args );
         PDFComparer pdfComparer = new PDFComparer();
-        IConfiguration configuration = new DefaultConfiguration();
+        IProfile profile = new DefaultProfile();
+        try {
+            System.out.println( "all modified texts" );
+            profile.putValue( PDFCProperty.COMPARE_TYPES, "" + CompareType.TEXT );
+            showModifications( pdfComparer.setProfile( profile ).compare( files[0], files[1] ) );
 
-        System.out.println( "all modified texts" );
-        configuration.putValue( PDFCProperty.COMPARE_TYPES, "" + CompareType.TEXT );
-        showModifications( pdfComparer.setConfiguration( configuration ).compare( files[0], files[1] ) );
+            System.out.println( "\nall modified lines" );
+            profile.putValue( PDFCProperty.COMPARE_TYPES, "" + CompareType.LINE );
+            showModifications( pdfComparer.setProfile( profile ).compare( files[0], files[1] ) );
 
-        System.out.println( "\nall modified lines" );
-        configuration.putValue( PDFCProperty.COMPARE_TYPES, "" + CompareType.LINE );
-        showModifications( pdfComparer.setConfiguration( configuration ).compare( files[0], files[1] ) );
-
-        System.out.println( "\nall modified images" );
-        configuration.putValue( PDFCProperty.COMPARE_TYPES, "" + CompareType.IMAGE );
-        showModifications( pdfComparer.setConfiguration( configuration ).compare( files[0], files[1] ) );
+            System.out.println( "\nall modified images" );
+            profile.putValue( PDFCProperty.COMPARE_TYPES, "" + CompareType.IMAGE );
+            showModifications( pdfComparer.setProfile( profile ).compare( files[0], files[1] ) );
+        }catch( PdfcException e ) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -99,5 +103,4 @@ public class OutputSpecifyModifyTypes {
         }
         return fileObject;
     }
-
 }

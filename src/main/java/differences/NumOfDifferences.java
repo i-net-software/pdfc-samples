@@ -2,6 +2,7 @@ package differences;
 
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
+import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.results.ResultModel;
 
 import java.io.File;
@@ -28,7 +29,12 @@ public class NumOfDifferences {
         File[] files = getFileOfArguments( args );
         PDFComparer pdfComparer = new PDFComparer();
 
-        ResultModel result = pdfComparer.compare( files[0], files[1] );
+        ResultModel result = null;
+        try {
+            result = pdfComparer.compare( files[0], files[1] );
+        } catch( PdfcException e ) {
+            e.printStackTrace();
+        }
         int differences = result.getDifferencesCount( false );
 
         System.out.println( "differences = " + differences );

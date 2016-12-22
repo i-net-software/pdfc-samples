@@ -2,6 +2,7 @@ package render;
 
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
+import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.generator.model.DiffGroup;
 import com.inet.pdfc.generator.model.Modification;
 import com.inet.pdfc.model.EnumerationProgress;
@@ -50,16 +51,20 @@ public class Render {
      */
     public Render( final File[] files ) {
         PDFComparer pdfComparer = new PDFComparer();
-        ResultModel compare = pdfComparer.compare( files[0], files[1] );
+        ResultModel compare = null;
+        try {
+
+        compare = pdfComparer.compare( files[0], files[1] );
         ResultPage page = compare.getPage( 0, true );
 
         frame = new JFrame();
         frame.setTitle( "PDF Difference" );
         frame.setSize( page.getWidth(), page.getHeight() );
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        try {
             frame.add( new PDFViewer( compare ) );
         } catch( IOException e ) {
+            e.printStackTrace();
+        } catch( PdfcException e ) {
             e.printStackTrace();
         }
     }
@@ -94,7 +99,7 @@ public class Render {
          * @param compare A comparer between 2 PDF files
          * @throws IOException
          */
-        public PDFViewer( final ResultModel compare ) throws IOException {
+        public PDFViewer( final ResultModel compare ) throws IOException, PdfcException {
             this.compare = compare;
 
             EnumerationProgress pages = compare.getComparisonParameters().getFirstFile().getContent().getPages( null, 0 );

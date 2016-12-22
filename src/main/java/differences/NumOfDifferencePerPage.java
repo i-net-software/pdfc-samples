@@ -2,6 +2,7 @@ package differences;
 
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
+import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.generator.model.DiffGroup;
 import com.inet.pdfc.generator.model.DifferencePages;
 import com.inet.pdfc.generator.model.Modification;
@@ -32,7 +33,12 @@ public class NumOfDifferencePerPage {
 
         File[] files = getFileOfArguments( args );
         PDFComparer pdfComparer = new PDFComparer();
-        ResultModel result = pdfComparer.compare( files[0], files[1] );
+        ResultModel result = null;
+        try {
+            result = pdfComparer.compare( files[0], files[1] );
+        } catch( PdfcException e ) {
+            e.printStackTrace();
+        }
 
         //Array for the result
         int[] changePerPage = new int[Math.max( result.getPageCount(true), result.getPageCount(false) )];

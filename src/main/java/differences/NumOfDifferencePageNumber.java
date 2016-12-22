@@ -2,6 +2,7 @@ package differences;
 
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
+import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.generator.message.InfoData;
 import com.inet.pdfc.results.ResultModel;
 
@@ -28,7 +29,12 @@ public class NumOfDifferencePageNumber {
 
         File[] files = getFileOfArguments( args );
 
-        ResultModel result = new PDFComparer().compare( files[0], files[1] );
+        ResultModel result = null;
+        try {
+            result = new PDFComparer().compare( files[0], files[1] );
+        } catch( PdfcException e ) {
+            e.printStackTrace();
+        }
         InfoData infoData = result.getComparisonParameters();
 
         int firstTotalPageNumber = infoData.getFirstTotalPageNumber();

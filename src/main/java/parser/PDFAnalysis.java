@@ -2,6 +2,7 @@ package parser;
 
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
+import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.model.*;
 import com.inet.pdfc.results.ResultModel;
 
@@ -30,12 +31,13 @@ public class PDFAnalysis {
 
         File[] files = getFileOfArguments( args );
         PDFComparer pdfComparer = new PDFComparer();
-        ResultModel compare = pdfComparer.compare( files[0], files[1] );
+
 
         try {
+            ResultModel compare = pdfComparer.compare( files[0], files[1] );
             Document document = compare.getComparisonParameters().getFirstFile().getContent();
             int index = 0;
-            Enumeration<Page> pages = document.getPages( null, index );
+            Enumeration<Page> pages = (Enumeration<Page>)document.getPages( null, index );
             while( pages.hasMoreElements() ){
                 System.out.println( "\npage number = " + index++ );
                 Page page = pages.nextElement();
@@ -60,7 +62,7 @@ public class PDFAnalysis {
                 }
             }
             System.out.println( "number of pages = " + index );
-        } catch( IOException e ) {
+        } catch( PdfcException e ) {
             e.printStackTrace();
         }
     }

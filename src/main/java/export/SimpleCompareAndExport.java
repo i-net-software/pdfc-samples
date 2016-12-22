@@ -2,6 +2,7 @@ package export;
 
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
+import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.presenter.DifferencesPDFPresenter;
 
 import java.io.File;
@@ -30,9 +31,13 @@ public class SimpleCompareAndExport {
 
         //Used the current i-net PDFC configuration. If no configuration has been previously set then the default configuration will be used.
         DifferencesPDFPresenter differencesPDFPresenter = new DifferencesPDFPresenter( files[0].getParentFile() );
-        new PDFComparer()
-                        .addPresenter( differencesPDFPresenter )
-                        .compare( files[0], files[1] );
+        try {
+            new PDFComparer()
+                            .addPresenter( differencesPDFPresenter )
+                            .compare( files[0], files[1] );
+        } catch( PdfcException e ) {
+            e.printStackTrace();
+        }
     }
 
     /**

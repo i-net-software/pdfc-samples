@@ -2,6 +2,7 @@ package console;
 
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
+import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.presenter.ConsolePresenter;
 
 import java.io.File;
@@ -26,9 +27,13 @@ public class SimpleConsole {
         }
 
         File[] files = getFileOfArguments( args );
-        new PDFComparer()
-                        .addPresenter( new ConsolePresenter() )
-                        .compare( files[1], files[0] );
+        try {
+            new PDFComparer()
+                            .addPresenter( new ConsolePresenter() )
+                            .compare( files[1], files[0] );
+        } catch( PdfcException e ) {
+            e.printStackTrace();
+        }
     }
 
     /**

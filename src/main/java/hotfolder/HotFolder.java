@@ -1,6 +1,7 @@
 package hotfolder;
 
 import com.inet.pdfc.PDFComparer;
+import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.presenter.DifferencesPDFPresenter;
 import com.inet.pdfc.results.ResultModel;
 
@@ -74,6 +75,8 @@ public class HotFolder {
                 }
             } catch( IOException ex ) {
                 ex.printStackTrace();
+            } catch( PdfcException e ) {
+                e.printStackTrace();
             }
         };
         WatchDir watcher = new WatchDir( sourcePath, false, listener );

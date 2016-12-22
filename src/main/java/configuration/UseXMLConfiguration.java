@@ -3,6 +3,7 @@ package configuration;
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.config.*;
+import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.presenter.DifferencesPrintPresenter;
 import com.inet.pdfc.presenter.ReportPDFPresenter;
 
@@ -35,18 +36,22 @@ public class UseXMLConfiguration {
         }
 
         File[] files = getFileOfArguments( args );
-        IConfiguration configuration = null;
+        IProfile profile = null;
         try {
-            configuration = new XMLConfiguration( files[2] );
+            profile = new XMLProfile( files[2] );
         } catch( InvalidPropertiesFormatException e ) {
             System.out.println( "The file = " + files[2] + " is not a correct XML-Configuration File" );
             e.printStackTrace();
         }
 
-        new PDFComparer()
-                        .setConfiguration( configuration )
-                        .addPresenter( new ReportPDFPresenter(false, true, files[0].getParentFile()) )
-                        .compare( files[0], files[1] );
+        try {
+            new PDFComparer()
+                            .setProfile( profile )
+                            .addPresenter( new ReportPDFPresenter(false, true, files[0].getParentFile()) )
+                            .compare( files[0], files[1] );
+        } catch( PdfcException e ) {
+            e.printStackTrace();
+        }
     }
 
     /**

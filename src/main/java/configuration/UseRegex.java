@@ -3,6 +3,7 @@ package configuration;
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.config.*;
+import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.generator.model.DiffGroup;
 import com.inet.pdfc.generator.model.Modification;
 import com.inet.pdfc.results.ResultModel;
@@ -33,9 +34,9 @@ public class UseRegex {
         PDFComparer pdfComparer = new PDFComparer();
 
         System.out.println( "\nFiltered " );
-        IConfiguration configuration = new DefaultConfiguration();
+        IProfile profile = new DefaultProfile();
 
-        configuration.putValue( PDFCProperty.FILTER_PATTERNS, ""
+        profile.putValue( PDFCProperty.FILTER_PATTERNS, ""
                         //for removing all numbers that are not in a text
                         + "\\s\\d+$|regexp|active\n"
                         + "^\\d+\\s|regexp|active\n"
@@ -47,11 +48,15 @@ public class UseRegex {
                         //filtered length unit
                         + "\\s(mm|cm|dm|m|km)|regexp|active\n"
         );
-        configuration.putValue( PDFCProperty.FILTERS, "REGEXP" );
+        profile.putValue( PDFCProperty.FILTERS, "REGEXP" );
 
-        showModifications( pdfComparer
-                                           .setConfiguration( configuration )
-                                           .compare( files[0], files[1] ) );
+        try {
+            showModifications( pdfComparer
+                                               .setProfile( profile )
+                                               .compare( files[0], files[1] ) );
+        } catch( PdfcException e ) {
+            e.printStackTrace();
+        }
     }
 
     /**
