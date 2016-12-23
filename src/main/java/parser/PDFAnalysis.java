@@ -37,7 +37,7 @@ public class PDFAnalysis {
             ResultModel compare = pdfComparer.compare( files[0], files[1] );
             Document document = compare.getComparisonParameters().getFirstFile().getContent();
             int index = 0;
-            Enumeration<Page> pages = (Enumeration<Page>)document.getPages( null, index );
+            EnumerationProgress pages = document.getPages( null, index );
             while( pages.hasMoreElements() ){
                 System.out.println( "\npage number = " + index++ );
                 Page page = pages.nextElement();
