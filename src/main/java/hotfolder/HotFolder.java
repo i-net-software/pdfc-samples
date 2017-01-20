@@ -1,10 +1,5 @@
 package hotfolder;
 
-import com.inet.pdfc.PDFComparer;
-import com.inet.pdfc.error.PdfcException;
-import com.inet.pdfc.presenter.DifferencesPDFPresenter;
-import com.inet.pdfc.results.ResultModel;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,6 +8,11 @@ import java.nio.file.Paths;
 import java.nio.file.StandardWatchEventKinds;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import com.inet.pdfc.PDFComparer;
+import com.inet.pdfc.error.PdfcException;
+import com.inet.pdfc.presenter.DifferencesPDFPresenter;
+import com.inet.pdfc.results.ResultModel;
 
 /**
  * A Java app which watches a folder for file changes and automatically compares new PDFs.
@@ -54,8 +54,7 @@ public class HotFolder {
             Files.createDirectories( reportsPath );
         }
         System.out.println( "watching for new files at " + sourcePath.toAbsolutePath().toString() );
-        WatchDir.WatchEventListener listener = ev -> {
-            Path path = ev.context().toAbsolutePath();
+        WatchDir.WatchEventListener listener = ( ev, path ) -> {
             try {
                 if( ev.kind() == StandardWatchEventKinds.ENTRY_CREATE &&
                                 path.getFileName().toString().toLowerCase().endsWith( ".pdf" ) ) {
