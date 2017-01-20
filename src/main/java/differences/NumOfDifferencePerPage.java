@@ -1,17 +1,16 @@
 package differences;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.generator.model.DiffGroup;
 import com.inet.pdfc.generator.model.DifferencePages;
 import com.inet.pdfc.generator.model.Modification;
-import com.inet.pdfc.model.PagedElement;
 import com.inet.pdfc.results.ResultModel;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
 
 /**
  * A sample that calculates the number of differences between 2 PDF files, grouped by page.
@@ -36,34 +35,34 @@ public class NumOfDifferencePerPage {
         ResultModel result = null;
         try {
             result = pdfComparer.compare( files[0], files[1] );
-        } catch( PdfcException e ) {
-            e.printStackTrace();
-        }
 
-        //Array for the result
-        int[] changePerPage = new int[Math.max( result.getPageCount(true), result.getPageCount(false) )];
+            //Array for the result
+            int[] changePerPage = new int[Math.max( result.getPageCount( true ), result.getPageCount( false ) )];
 
-        List<DiffGroup> differences = result.getDifferences( false );
-        for( DiffGroup difference : differences ) {
-            List<Modification> modifications = difference.getModifications();
-            if( modifications != null ) {
-                for( Modification modification : modifications ) {
-                    DifferencePages differencePages = modification.getDifferencePages( true );
-                    if(differencePages != null) {
-                        int startDiff = differencePages.getStartPage();
-                        int endDiff = differencePages.getEndPage();
+            List<DiffGroup> differences = result.getDifferences( false );
+            for( DiffGroup difference : differences ) {
+                List<Modification> modifications = difference.getModifications();
+                if( modifications != null ) {
+                    for( Modification modification : modifications ) {
+                        DifferencePages differencePages = modification.getDifferencePages( true );
+                        if( differencePages != null ) {
+                            int startDiff = differencePages.getStartPage();
+                            int endDiff = differencePages.getEndPage();
 
-                        for( ; startDiff <= endDiff; ++startDiff ) {
-                            changePerPage[startDiff-1] = changePerPage[startDiff-1] + 1;
+                            for( ; startDiff <= endDiff; ++startDiff ) {
+                                changePerPage[startDiff - 1] = changePerPage[startDiff - 1] + 1;
+                            }
                         }
                     }
                 }
             }
-        }
 
-        //output the result
-        for( int i = 0; i < changePerPage.length; i++ ) {
-            System.out.println( (i + 1) + ". page from first document has change = " + changePerPage[i] );
+            //output the result
+            for( int i = 0; i < changePerPage.length; i++ ) {
+                System.out.println( (i + 1) + ". page from first document has change = " + changePerPage[i] );
+            }
+        } catch( PdfcException e ) {
+            e.printStackTrace();
         }
     }
 

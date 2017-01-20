@@ -1,15 +1,15 @@
 package export;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.presenter.BasePresenter;
 import com.inet.pdfc.presenter.DifferencesPDFPresenter;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 
 /**
  * A sample for exporting the result of a comparison of 2 PDF Files to a PDF,
@@ -43,8 +43,7 @@ public class CompareAndExportToSpecificFilename {
         DifferencesPDFPresenter differencesPDFPresenter = new PersonalDifferencesPDFPresenter( exportFile );
 
         try {
-            new PDFComparer()
-                            .addPresenter( differencesPDFPresenter )
+            new PDFComparer().addPresenter( differencesPDFPresenter )
                             .compare( files[0], files[1] );
         } catch( PdfcException e ) {
             e.printStackTrace();
@@ -74,6 +73,7 @@ public class CompareAndExportToSpecificFilename {
          * @param spawnWithParent
          * @return a copy of this
          */
+        @Override
         public BasePresenter spawn( boolean spawnWithParent ) {
             return new PersonalDifferencesPDFPresenter( exportFile );
         }
@@ -132,10 +132,8 @@ public class CompareAndExportToSpecificFilename {
     }
 
     /**
-     * Returns a File object based on a string path
-     * The file must not be null and must not be a directory
-     * If the file not exist, it will be created
-     *
+     * Returns a File object based on a string path The file must not be null and must not be a directory If the file
+     * does not exist, it will be created
      * @param file location to the file
      * @return The File object
      */
@@ -146,7 +144,7 @@ public class CompareAndExportToSpecificFilename {
             fileObject.createNewFile();
         } catch( IOException e ) {
             e.printStackTrace();
-            throw new IllegalArgumentException( "the export file can not will create" );
+            throw new IllegalArgumentException( "the export file can not be created" );
         }
 
         if( fileObject.isDirectory() ) {

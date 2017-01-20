@@ -1,22 +1,21 @@
 package differences;
 
+import java.io.File;
+import java.io.IOException;
+
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.results.ResultModel;
 
-import java.io.File;
-import java.io.IOException;
-
 /**
- * A sample to show the difference/changes beetween 2 PDF files.
+ * A sample to show the difference/changes between 2 PDF files. <br>
  * Expects 2 arguments - the paths of the PDF files
  */
 public class NumOfDifferences {
 
     /**
-     * Start the sample, that show the difference/changes beetween 2 pdf files.
-     *
+     * Start the sample, that show the difference/changes between 2 pdf files.
      * @param args Expected 2 arguments, the path of the PDF files
      */
     public static void main( String[] args ) {
@@ -32,12 +31,12 @@ public class NumOfDifferences {
         ResultModel result = null;
         try {
             result = pdfComparer.compare( files[0], files[1] );
+            int differences = result.getDifferencesCount( false );
+
+            System.out.println( "differences = " + differences );
         } catch( PdfcException e ) {
             e.printStackTrace();
         }
-        int differences = result.getDifferencesCount( false );
-
-        System.out.println( "differences = " + differences );
     }
 
     /**

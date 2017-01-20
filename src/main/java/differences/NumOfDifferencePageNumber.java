@@ -1,13 +1,13 @@
 package differences;
 
+import java.io.File;
+import java.io.IOException;
+
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.generator.message.InfoData;
 import com.inet.pdfc.results.ResultModel;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * A sample to show the difference in number of pages between 2 PDF files.
@@ -32,19 +32,19 @@ public class NumOfDifferencePageNumber {
         ResultModel result = null;
         try {
             result = new PDFComparer().compare( files[0], files[1] );
+            InfoData infoData = result.getComparisonParameters();
+
+            int firstTotalPageNumber = infoData.getFirstTotalPageNumber();
+            int secondTotalPageNumber = infoData.getSecondTotalPageNumber();
+            System.out.println( "firstTotalPageNumber = " + firstTotalPageNumber );
+            System.out.println( "secondTotalPageNumber = " + secondTotalPageNumber );
+
+            int differencePageNumber = firstTotalPageNumber - secondTotalPageNumber;
+
+            System.out.println( "difference page number = " + differencePageNumber );
         } catch( PdfcException e ) {
             e.printStackTrace();
         }
-        InfoData infoData = result.getComparisonParameters();
-
-        int firstTotalPageNumber = infoData.getFirstTotalPageNumber();
-        int secondTotalPageNumber = infoData.getSecondTotalPageNumber();
-        System.out.println( "firstTotalPageNumber = " + firstTotalPageNumber );
-        System.out.println( "secondTotalPageNumber = " + secondTotalPageNumber );
-
-        int differencePageNumber = firstTotalPageNumber - secondTotalPageNumber;
-
-        System.out.println( "difference page number = " + differencePageNumber );
     }
 
     /**

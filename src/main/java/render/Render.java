@@ -1,5 +1,19 @@
 package render;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.error.PdfcException;
@@ -9,15 +23,6 @@ import com.inet.pdfc.model.EnumerationProgress;
 import com.inet.pdfc.model.PagedElement;
 import com.inet.pdfc.results.ResultModel;
 import com.inet.pdfc.results.ResultPage;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
 
 /**
  * A sample to show the PDF render function with a simple function for displayer markers where differences are detected.
@@ -54,13 +59,13 @@ public class Render {
         ResultModel compare = null;
         try {
 
-        compare = pdfComparer.compare( files[0], files[1] );
-        ResultPage page = compare.getPage( 0, true );
+            compare = pdfComparer.compare( files[0], files[1] );
+            ResultPage page = compare.getPage( 0, true );
 
-        frame = new JFrame();
-        frame.setTitle( "PDF Difference" );
-        frame.setSize( page.getWidth(), page.getHeight() );
-        frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+            frame = new JFrame();
+            frame.setTitle( "PDF Difference" );
+            frame.setSize( page.getWidth(), page.getHeight() );
+            frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
             frame.add( new PDFViewer( compare ) );
         } catch( IOException e ) {
             e.printStackTrace();
