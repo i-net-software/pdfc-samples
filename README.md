@@ -1,6 +1,6 @@
 # PDFC-Samples
 
-This project provides code samples for the API-usage of the [i-net PDF Content Comparer](https://www.inetsoftware.de/products/pdf-content-comparer "i-net PDF Content Comparer"). 
+This project provides code samples for the API usage of the [i-net PDF Content Comparer](https://www.inetsoftware.de/products/pdf-content-comparer "i-net PDF Content Comparer"). 
 The samples are all written in Java and contain numerous examples for 
 
 * Basic comparison procedure calls
