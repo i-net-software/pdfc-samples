@@ -21,6 +21,7 @@ import com.inet.pdfc.generator.model.DiffGroup;
 import com.inet.pdfc.generator.model.Modification;
 import com.inet.pdfc.model.EnumerationProgress;
 import com.inet.pdfc.model.PagedElement;
+import com.inet.pdfc.plugin.DocumentReader;
 import com.inet.pdfc.results.ResultModel;
 import com.inet.pdfc.results.ResultPage;
 
@@ -107,7 +108,7 @@ public class Render {
         public PDFViewer( final ResultModel compare ) throws IOException, PdfcException {
             this.compare = compare;
 
-            EnumerationProgress pages = compare.getComparisonParameters().getFirstFile().getContent().getPages( null, 0 );
+            EnumerationProgress pages = DocumentReader.getInstance().readDocument( compare.getComparisonParameters().getFirstFile() ).getPages( null, 0 );
             int index = 0;
             while( pages.hasMoreElements() ){
                 ++index;

@@ -4,6 +4,7 @@ import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.model.*;
+import com.inet.pdfc.plugin.DocumentReader;
 import com.inet.pdfc.results.ResultModel;
 
 import java.io.File;
@@ -35,7 +36,7 @@ public class PDFAnalysis {
 
         try {
             ResultModel compare = pdfComparer.compare( files[0], files[1] );
-            Document document = compare.getComparisonParameters().getFirstFile().getContent();
+            Document document = DocumentReader.getInstance().readDocument( compare.getComparisonParameters().getFirstFile() );
             int index = 0;
             EnumerationProgress pages = document.getPages( null, index );
             while( pages.hasMoreElements() ){
