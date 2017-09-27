@@ -36,6 +36,10 @@ public class NumOfDifferences {
             System.out.println( "differences = " + differences );
         } catch( PdfcException e ) {
             e.printStackTrace();
+        } finally {
+            if( result != null ) {
+                result.close();
+            }
         }
     }
 

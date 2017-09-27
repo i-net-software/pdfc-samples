@@ -1,12 +1,12 @@
 package export;
 
+import java.io.File;
+import java.io.IOException;
+
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.presenter.DifferencesPDFPresenter;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * A simple sample for exporting the results of the comparison of 2 PDF Files to a PDF.
@@ -34,7 +34,7 @@ public class SimpleCompareAndExport {
         try {
             new PDFComparer()
                             .addPresenter( differencesPDFPresenter )
-                            .compare( files[0], files[1] );
+                            .compare( files[0], files[1] ).close();
         } catch( PdfcException e ) {
             e.printStackTrace();
         }

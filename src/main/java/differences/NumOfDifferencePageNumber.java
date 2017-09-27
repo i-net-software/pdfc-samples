@@ -44,6 +44,10 @@ public class NumOfDifferencePageNumber {
             System.out.println( "difference page number = " + differencePageNumber );
         } catch( PdfcException e ) {
             e.printStackTrace();
+        } finally {
+            if( result != null ) {
+                result.close();
+            }
         }
     }
 

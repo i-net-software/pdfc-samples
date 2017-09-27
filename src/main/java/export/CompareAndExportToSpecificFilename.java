@@ -44,7 +44,7 @@ public class CompareAndExportToSpecificFilename {
 
         try {
             new PDFComparer().addPresenter( differencesPDFPresenter )
-                            .compare( files[0], files[1] );
+                            .compare( files[0], files[1] ).close();
         } catch( PdfcException e ) {
             e.printStackTrace();
         }

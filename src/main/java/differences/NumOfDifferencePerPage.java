@@ -63,6 +63,10 @@ public class NumOfDifferencePerPage {
             }
         } catch( PdfcException e ) {
             e.printStackTrace();
+        } finally {
+            if( result != null ) {
+                result.close();
+            }
         }
     }
 

@@ -1,16 +1,15 @@
 package report;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
 import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.presenter.BasePresenter;
 import com.inet.pdfc.presenter.ReportPDFPresenter;
-import export.CompareAndExportToSpecificFilename;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 
 /**
  * A sample for exporting the result of a comparison of 2 PDF Files to a PDF,
@@ -45,7 +44,7 @@ public class ReportingToSpecificFilename {
         try {
             new PDFComparer()
                             .addPresenter( reportPDFPresenter )
-                            .compare( files[0], files[1] );
+                            .compare( files[0], files[1] ).close();
         } catch( PdfcException e ) {
             e.printStackTrace();
         }
@@ -77,6 +76,7 @@ public class ReportingToSpecificFilename {
          * @param spawnWithParent
          * @return a copy of this
          */
+        @Override
         public BasePresenter spawn( boolean spawnWithParent ) {
             return this;
         }
