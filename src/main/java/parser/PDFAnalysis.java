@@ -1,15 +1,20 @@
 package parser;
 
-import com.inet.pdfc.PDFC;
-import com.inet.pdfc.PDFComparer;
-import com.inet.pdfc.error.PdfcException;
-import com.inet.pdfc.model.*;
-import com.inet.pdfc.results.ResultModel;
-
 import java.io.File;
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.List;
+
+import com.inet.pdfc.PDFC;
+import com.inet.pdfc.config.FilePdfSource;
+import com.inet.pdfc.error.PdfcException;
+import com.inet.pdfc.model.Document;
+import com.inet.pdfc.model.DrawableElement;
+import com.inet.pdfc.model.EnumerationProgress;
+import com.inet.pdfc.model.ImageElement;
+import com.inet.pdfc.model.Page;
+import com.inet.pdfc.model.ShapeElement;
+import com.inet.pdfc.model.TextElement;
+import com.inet.pdfc.plugin.DocumentReader;
 
 /**
  * A sample to show the internal PDF data structure
@@ -30,12 +35,9 @@ public class PDFAnalysis {
         }
 
         File[] files = getFileOfArguments( args );
-        PDFComparer pdfComparer = new PDFComparer();
-
 
         try {
-            ResultModel compare = pdfComparer.compare( files[0], files[1] );
-            Document document = compare.getComparisonParameters().getFirstFile().getContent();
+            Document document = DocumentReader.getInstance().readDocument( new FilePdfSource( files[0] ) );
             int index = 0;
             EnumerationProgress pages = document.getPages( null, index );
             while( pages.hasMoreElements() ){

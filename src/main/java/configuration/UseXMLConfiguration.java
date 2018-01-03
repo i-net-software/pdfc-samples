@@ -1,19 +1,15 @@
 package configuration;
 
-import com.inet.pdfc.PDFC;
-import com.inet.pdfc.PDFComparer;
-import com.inet.pdfc.config.*;
-import com.inet.pdfc.error.PdfcException;
-import com.inet.pdfc.presenter.DifferencesPrintPresenter;
-import com.inet.pdfc.presenter.ReportPDFPresenter;
-
-import javax.print.PrintService;
-import javax.print.PrintServiceLookup;
-import javax.print.attribute.HashPrintRequestAttributeSet;
-import javax.print.attribute.PrintRequestAttributeSet;
 import java.io.File;
 import java.io.IOException;
 import java.util.InvalidPropertiesFormatException;
+
+import com.inet.pdfc.PDFC;
+import com.inet.pdfc.PDFComparer;
+import com.inet.pdfc.config.IProfile;
+import com.inet.pdfc.config.XMLProfile;
+import com.inet.pdfc.error.PdfcException;
+import com.inet.pdfc.presenter.ReportPDFPresenter;
 
 /**
  * A sample to show, how use a PDFC-Config XML-File.

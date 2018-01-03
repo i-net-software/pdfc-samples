@@ -1,19 +1,20 @@
 package print;
 
-import com.inet.pdfc.PDFC;
-import com.inet.pdfc.PDFComparer;
-import com.inet.pdfc.config.FilePdfSource;
-import com.inet.pdfc.presenter.DifferencesPrintPresenter;
-import com.inet.pdfc.results.ResultModel;
+import java.io.File;
+import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
-import java.io.File;
-import java.io.IOException;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
+
+import com.inet.pdfc.PDFC;
+import com.inet.pdfc.PDFComparer;
+import com.inet.pdfc.config.FilePdfSource;
+import com.inet.pdfc.presenter.DifferencesPrintPresenter;
+import com.inet.pdfc.results.ResultModel;
 
 /**
  * A simple sample for printing the result of the comparison of 2 PDF Files
@@ -48,6 +49,7 @@ public class SimpleCompareAndPrint {
         try {
             ResultModel resultModel = resultModelCompletableFuture.get();
             new DifferencesPrintPresenter( printService, attributes ).executeImmediately( resultModel );
+            resultModel.close();
         } catch( InterruptedException e ) {
             e.printStackTrace();
         } catch( ExecutionException e ) {
