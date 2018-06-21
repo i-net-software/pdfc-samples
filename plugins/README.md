@@ -1,0 +1,1 @@
+This folder is where the needed i-net PDFC plugins must be located in order to be found. Plugins are always searched in `<WORKING DIR>/plugins`. Download the PDFC SDK at https://download.inetsoftware.de/pdfc-sdk-latest.zip and place at minimum the files `plugins/reporting.zip` and `plugins/pdfparserplugin.zip` in this folder.

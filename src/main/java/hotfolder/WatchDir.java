@@ -1,5 +1,9 @@
 package hotfolder;
 
+import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
+import static java.nio.file.StandardWatchEventKinds.*;
+
+import java.io.IOException;
 /*
  * Copyright (c) 2008, 2010, Oracle and/or its affiliates. All rights reserved.
  *
@@ -30,13 +34,17 @@ package hotfolder;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-import java.nio.file.*;
-import static java.nio.file.StandardWatchEventKinds.*;
-import static java.nio.file.LinkOption.*;
-import java.nio.file.attribute.*;
-import java.io.*;
-import java.util.*;
+import java.nio.file.FileSystems;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Example to watch a directory (or tree) for changes to files.
@@ -49,7 +57,11 @@ public class WatchDir {
     private final boolean recursive;
     private boolean trace = false;
     interface WatchEventListener {
-        void directoryChanged(WatchEvent<Path> event);
+        /**
+         * @param event
+         * @param path path of the added, removed or modified file or directory
+         */
+        void directoryChanged( WatchEvent<Path> event, Path path );
     }
     private WatchEventListener listener;
 
@@ -148,7 +160,7 @@ public class WatchDir {
                 Path child = dir.resolve(name);
 
                 // send event to listeners
-                this.listener.directoryChanged( ev );
+                this.listener.directoryChanged( ev, child );
 
                 // if directory is created, and watching recursively, then
                 // register it and its sub-directories
@@ -181,21 +193,4 @@ public class WatchDir {
         System.exit(-1);
     }
 
-    public static void main(String[] args) throws IOException {
-        // parse arguments
-        if (args.length == 0 || args.length > 2)
-            usage();
-        boolean recursive = false;
-        int dirArg = 0;
-        if (args[0].equals("-r")) {
-            if (args.length < 2)
-                usage();
-            recursive = true;
-            dirArg++;
-        }
-
-        // register directory and process its events
-        Path dir = Paths.get(args[dirArg]);
-        new WatchDir(dir, recursive, e -> {}).processEvents();
-    }
 }
