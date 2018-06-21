@@ -2,8 +2,9 @@ package export;
 
 import com.inet.config.ConfigurationManager;
 import com.inet.pdfc.PDFComparer;
+import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.presenter.DifferencesPDFPresenter;
-import com.inet.pdfc.presenter.ReportPDFPresenter;
+import util.SampleUtil;
 
 import java.io.*;
 
@@ -25,11 +26,13 @@ public class CompareAndExportToSpecificFilename {
 
         //Used the current i-net PDFC configuration. If no configuration has been previously set then the default configuration will be used.
         DifferencesPDFPresenter differencesPDFPresenter = new PersonalDifferencesPDFPresenter( exportFile );
-
-        new PDFComparer()
-                        .addPresenter( new DifferencesPDFPresenter( files[0].getParentFile() ) )
-                        .addPresenter( differencesPDFPresenter )
-                        .compare( files[1], files[0] );
+        PDFComparer pdfComparer = new PDFComparer().addPresenter( new DifferencesPDFPresenter( files[0].getParentFile() ) ).addPresenter( differencesPDFPresenter );
+        try {
+            pdfComparer.compare( files[1], files[0] );
+            SampleUtil.showPresenterError( pdfComparer );
+        } catch( PdfcException e ) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -71,31 +74,7 @@ public class CompareAndExportToSpecificFilename {
         if (args == null || args.length != 3  ) {
             throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2> <PDF-File-Output>" );
         }
-        return new File[]{ checkAndGetFile( args[0] ), checkAndGetFile( args[1] )};
-    }
-
-    /**
-     * For get a File-Object out a String-Path
-     *
-     * Check for null, exists and directory
-     *
-     * @param file Path for the File
-     * @return The Fileobject
-     */
-    public static File checkAndGetFile( final String file){
-        if(file == null){
-            throw new IllegalArgumentException( "The parameter is empty.\n parameter = " + file );
-        }
-        final File fileObject = new File( file );
-
-        if( ! fileObject.exists() ){
-            throw new IllegalArgumentException( "The file didn't exist.\n parameter = " + file );
-        }
-        if( fileObject.isDirectory()){
-            throw new IllegalArgumentException( "The file is a folder and not a pdf file.\n parameter = " + file );
-        }
-
-        return  fileObject;
+        return new File[]{ SampleUtil.checkAndGetFile( args[0] ), SampleUtil.checkAndGetFile( args[1] )};
     }
 
     public static File checkAndCreateFile( final String file){

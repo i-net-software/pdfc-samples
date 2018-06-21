@@ -2,7 +2,9 @@ package differences;
 
 import com.inet.config.ConfigurationManager;
 import com.inet.pdfc.PDFComparer;
+import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.results.ResultModel;
+import util.SampleUtil;
 
 import java.io.File;
 
@@ -18,10 +20,14 @@ public class NumOfDifferences {
         File[] files = getFileOfArguments( args );
         PDFComparer pdfComparer = new PDFComparer();
 
-        ResultModel result = pdfComparer.compare( files[0], files[1] );
-        int differences = result.getDifferencesCount( false );
-
-        System.out.println( "differences = " + differences );
+        ResultModel result = null;
+        try {
+            result = pdfComparer.compare( files[0], files[1] );
+            int differences = result.getDifferencesCount( false );
+            System.out.println( "differences = " + differences );
+        } catch( PdfcException e ) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -35,32 +41,6 @@ public class NumOfDifferences {
         if (args == null || args.length != 2) {
             throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2>" );
         }
-        return new File[]{ checkAndGetFile( args[0] ), checkAndGetFile( args[1] )};
+        return new File[]{ SampleUtil.checkAndGetFile( args[0] ), SampleUtil.checkAndGetFile( args[1] )};
     }
-
-    /**
-     * For get a File-Object out a String-Path
-     *
-     * Check for null, exists and directory
-     *
-     * @param file Path for the File
-     * @return The Fileobject
-     */
-    public static File checkAndGetFile( final String file){
-        if(file == null){
-            throw new IllegalArgumentException( "The parameter is empty.\n parameter = " + file );
-        }
-        final File fileObject = new File( file );
-
-        if( ! fileObject.exists() ){
-            throw new IllegalArgumentException( "The file didn't exist.\n parameter = " + file );
-        }
-        if( fileObject.isDirectory()){
-            throw new IllegalArgumentException( "The file is a folder and not a pdf file.\n parameter = " + file );
-        }
-
-        return  fileObject;
-    }
-
-
 }

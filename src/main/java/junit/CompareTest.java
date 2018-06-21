@@ -2,6 +2,7 @@ package junit;
 
 import com.inet.config.ConfigurationManager;
 import com.inet.pdfc.PDFComparer;
+import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.generator.message.InfoData;
 import com.inet.pdfc.results.ResultModel;
 import org.junit.Assert;
@@ -29,7 +30,12 @@ public class CompareTest {
         File example1 =  new File(getClass().getResource( "Example1.pdf" ).getFile());
         File example2 =  new File(getClass().getResource( "Example2.pdf" ).getFile());
 
-        ResultModel result = pdfComparer.compare( example1, example2 );
+        ResultModel result = null;
+        try {
+            result = pdfComparer.compare( example1, example2 );
+        } catch( PdfcException e ) {
+            e.printStackTrace();
+        }
         InfoData comparisonParameters = result.getComparisonParameters();
 
 
