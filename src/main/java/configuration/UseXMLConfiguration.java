@@ -1,15 +1,14 @@
 package configuration;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.InvalidPropertiesFormatException;
 
-import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.config.IProfile;
 import com.inet.pdfc.config.XMLProfile;
 import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.presenter.ReportPDFPresenter;
+import util.SampleUtil;
 
 /**
  * A sample to show, how use a PDFC-Config XML-File.
@@ -25,12 +24,6 @@ public class UseXMLConfiguration {
      *             for the XML config file.
      */
     public static void main( String[] args ) {
-        try {
-            PDFC.requestAndSetTrialLicenseIfRequired();
-        } catch( IOException e ) {
-            e.printStackTrace();
-        }
-
         File[] files = getFileOfArguments( args );
         IProfile profile = null;
         try {
@@ -41,10 +34,11 @@ public class UseXMLConfiguration {
         }
 
         try {
-            new PDFComparer()
+            PDFComparer pdfComparer = new PDFComparer()
                             .setProfile( profile )
-                            .addPresenter( new ReportPDFPresenter(false, true, files[0].getParentFile()) )
-                            .compare( files[0], files[1] );
+                            .addPresenter( new ReportPDFPresenter( false, true, files[0].getParentFile() ) );
+            pdfComparer.compare( files[0], files[1] );
+            SampleUtil.showPresenterError( pdfComparer );
         } catch( PdfcException e ) {
             e.printStackTrace();
         }
@@ -61,28 +55,6 @@ public class UseXMLConfiguration {
             throw new IllegalArgumentException(
                             "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2> <XML-Configuration-File>" );
         }
-        return new File[] { checkAndGetFile( args[0] ), checkAndGetFile( args[1] ), checkAndGetFile( args[2] ) };
-    }
-
-    /**
-     * Returns a File object based on a string path
-     * The file must not be null, must exist and must not be a directory
-     *
-     * @param file path to the file
-     * @return The File object
-     */
-    public static File checkAndGetFile( final String file ) {
-        if( file == null ) {
-            throw new IllegalArgumentException( "The parameter is empty.\n parameter = " + file );
-        }
-        final File fileObject = new File( file );
-
-        if( !fileObject.exists() ) {
-            throw new IllegalArgumentException( "The file didn't exist.\n parameter = " + file );
-        }
-        if( fileObject.isDirectory() ) {
-            throw new IllegalArgumentException( "The file is a folder and not a PDF file.\n parameter = " + file );
-        }
-        return fileObject;
+        return new File[] { SampleUtil.checkAndGetFile( args[0] ), SampleUtil.checkAndGetFile( args[1] ), SampleUtil.checkAndGetFile( args[2] ) };
     }
 }

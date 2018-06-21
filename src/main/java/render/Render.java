@@ -4,17 +4,16 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.generator.model.DiffGroup;
@@ -24,6 +23,7 @@ import com.inet.pdfc.model.PagedElement;
 import com.inet.pdfc.plugin.DocumentReader;
 import com.inet.pdfc.results.ResultModel;
 import com.inet.pdfc.results.ResultPage;
+import util.SampleUtil;
 
 /**
  * A sample to show the PDF render function with a simple function for displayer markers where differences are detected.
@@ -40,12 +40,6 @@ public class Render {
      * @param args Expected 2 arguments, the path of the PDF files
      */
     public static void main( String[] args ) {
-        try {
-            PDFC.requestAndSetTrialLicenseIfRequired();
-        } catch( IOException e ) {
-            e.printStackTrace();
-        }
-
         File[] files = getFileOfArguments( args );
         new Render( files ).show();
     }
@@ -68,8 +62,6 @@ public class Render {
             frame.setSize( page.getWidth(), page.getHeight() );
             frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
             frame.add( new PDFViewer( compare ) );
-        } catch( IOException e ) {
-            e.printStackTrace();
         } catch( PdfcException e ) {
             e.printStackTrace();
         }
@@ -103,9 +95,9 @@ public class Render {
          * over the line.
          *
          * @param compare A comparer between 2 PDF files
-         * @throws IOException
+         * @throws PdfcException
          */
-        public PDFViewer( final ResultModel compare ) throws IOException, PdfcException {
+        public PDFViewer( final ResultModel compare ) throws PdfcException {
             this.compare = compare;
 
             EnumerationProgress pages = DocumentReader.getInstance().readDocument( compare.getComparisonParameters().getFirstFile() ).getPages( null, 0 );
@@ -116,7 +108,7 @@ public class Render {
             }
 
             maxPageNumber = index;
-            addMouseListener( new MouseListener() {
+            addMouseListener( new MouseAdapter() {
                 /**
                  * Every click goes to the next page,
                  * if no next page exists, it returns to page 1
@@ -129,22 +121,6 @@ public class Render {
                         currentPageIndex = 0;
                     }
                     repaint();
-                }
-
-                @Override
-                public void mousePressed( MouseEvent e ) {
-                }
-
-                @Override
-                public void mouseReleased( MouseEvent e ) {
-                }
-
-                @Override
-                public void mouseEntered( MouseEvent e ) {
-                }
-
-                @Override
-                public void mouseExited( MouseEvent e ) {
                 }
             } );
         }
@@ -212,29 +188,6 @@ public class Render {
         if( args == null || args.length != 2 ) {
             throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2>" );
         }
-        return new File[] { checkAndGetFile( args[0] ), checkAndGetFile( args[1] ) };
-    }
-
-    /**
-     * Returns a File object based on a string path
-     * The file must not be null, must exist and must not be a directory
-     *
-     * @param file path to the file
-     * @return The File object
-     */
-    public static File checkAndGetFile( final String file ) {
-        if( file == null ) {
-            throw new IllegalArgumentException( "The parameter is empty.\n parameter = " + file );
-        }
-        final File fileObject = new File( file );
-
-        if( !fileObject.exists() ) {
-            throw new IllegalArgumentException( "The file didn't exist.\n parameter = " + file );
-        }
-        if( fileObject.isDirectory() ) {
-            throw new IllegalArgumentException( "The file is a folder and not a PDF file.\n parameter = " + file );
-        }
-
-        return fileObject;
+        return new File[] { SampleUtil.checkAndGetFile( args[0] ), SampleUtil.checkAndGetFile( args[1] ) };
     }
 }
