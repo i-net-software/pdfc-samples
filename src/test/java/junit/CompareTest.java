@@ -21,12 +21,6 @@ public class CompareTest {
 
     @Before
     public void before() {
-        try {
-            PDFC.requestAndSetTrialLicenseIfRequired();
-        } catch( IOException e ) {
-            e.printStackTrace();
-        }
-
         pdfComparer = new PDFComparer();
     }
 
@@ -42,7 +36,7 @@ public class CompareTest {
         Assert.assertEquals( 10, result.getDifferencesCount( false ) );
         Assert.assertEquals( 10, result.getDifferencesCount( true ) );
 
-        Assert.assertEquals( 3, comparisonParameters.getFirstTotalPageNumber() );
-        Assert.assertEquals( 3, comparisonParameters.getSecondTotalPageNumber() );
+        Assert.assertEquals( 3, comparisonParameters.getFirstPageCount() );
+        Assert.assertEquals( 3, comparisonParameters.getSecondPageCount() );
     }
 }
