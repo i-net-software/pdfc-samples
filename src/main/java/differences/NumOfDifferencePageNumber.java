@@ -1,6 +1,5 @@
 package differences;
 
-import com.inet.config.ConfigurationManager;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.generator.message.InfoData;
@@ -41,7 +40,6 @@ public class NumOfDifferencePageNumber{
      * @return 2 Files
      */
     public static File[] getFileOfArguments(final String[] args){
-        ConfigurationManager.getInstance().setCurrent( ConfigurationManager.getInstance().get( 1, "Default" ) );
         if (args == null || args.length != 2) {
             throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2>" );
         }

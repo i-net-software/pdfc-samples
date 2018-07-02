@@ -32,12 +32,6 @@ public class CompareAndPrintWithPrintsetting {
      * @param args Expected 2 arguments, the path of the PDF files
      */
     public static void main( String[] args ) {
-        try {
-            PDFC.requestAndSetTrialLicenseIfRequired();
-        } catch( IOException e ) {
-            e.printStackTrace();
-        }
-
         File[] files = getFileOfArguments( args );
 
         //Used the current i-net PDFC configuration. If no configuration has been previously set then the default configuration will be used.
