@@ -11,10 +11,10 @@ dependencies {
     testCompile 'junit:junit:4.10'
 }
 if (!file('libs/PDFC.jar').exists() || !file('libs/inetcore.jar').exists() || 
-    !file('plugins/reporting.zip').exists() || !file('plugins/pdfparserplugin.zip').exists()) {
+    !file('plugins/reporting.zip').exists() || !file('plugins/parser.pdf.zip').exists()) {
     ant.fail('Please first download the i-net PDFC SDK at https://download.inetsoftware.de/pdfc-sdk-latest.zip and place:\n'+
-             ' - plugins/reporting.zip and plugins/pdfparserplugin.zip into the plugins subfolder\n'+
-             ' - java/PDFC.jar and java/inetcore.jar into the libs subfolder')
+             ' - i-net PDFC/plugins/reporting.zip and i-net PDFC/plugins/parser.pdf.zip into the plugins subfolder\n'+
+             ' - i-net PDFC/java/PDFC.jar and i-net PDFC/java/inetcore.jar into the libs subfolder')
 }
 
 task runOutputSpecifyModifyTypesSample(type:JavaExec) {
