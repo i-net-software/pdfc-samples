@@ -21,7 +21,8 @@ You can download the whole repository by using the **Git** version control syste
 After successfully having installed **Git**, enter
 
      $ git clone https://github.com/i-net-software/pdfc-samples
-
+     $ git checkout -b 4.3 origin/4.3
+     
 on the command line. This creates a directory `pdfc-samples` in your working directory containing the Java source files for the examples.
  
 Alternatively, if you are using an IDE like eclipse or IntelliJ Idea, you can clone the repository by using one of the avaiable **Git**-plugins for these tools.    
