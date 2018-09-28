@@ -25,6 +25,7 @@ public class CompareWithSettings {
      * @param args Expects 2 arguments: the paths of the 2 PDF files that will be compared,
      */
     public static void main( String[] args ) {
+        SampleUtil.filterServerPlugins();
         File[] files = getFileOfArguments( args );
 
         //Used the current i-net PDFC configuration. If no configuration has been previously set then the default configuration will be used.

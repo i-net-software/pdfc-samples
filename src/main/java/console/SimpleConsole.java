@@ -15,6 +15,7 @@ import java.io.File;
 public class SimpleConsole {
 
     public static void main( String[] args ) {
+        SampleUtil.filterServerPlugins();
         File[] files = getFileOfArguments( args );
         PDFComparer pdfComparer = new PDFComparer().addPresenter( new ConsolePresenter() );
         try {

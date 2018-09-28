@@ -17,6 +17,7 @@ import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.config.FilePdfSource;
 import com.inet.pdfc.presenter.DifferencesPrintPresenter;
 import com.inet.pdfc.results.ResultModel;
+import util.SampleUtil;
 
 /**
  * A sample for printing the result of the comparison of 2 PDF files
@@ -32,6 +33,7 @@ public class CompareAndPrintWithPrintsetting {
      * @param args Expected 2 arguments, the path of the PDF files
      */
     public static void main( String[] args ) {
+        SampleUtil.filterServerPlugins();
         File[] files = getFileOfArguments( args );
 
         //Used the current i-net PDFC configuration. If no configuration has been previously set then the default configuration will be used.

@@ -24,6 +24,7 @@ public class UseXMLConfiguration {
      *             for the XML config file.
      */
     public static void main( String[] args ) {
+        SampleUtil.filterServerPlugins();
         File[] files = getFileOfArguments( args );
         IProfile profile = null;
         try {

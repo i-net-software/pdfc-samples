@@ -5,6 +5,9 @@ import com.inet.pdfc.error.PresenterExceptionData;
 import com.inet.pdfc.generator.model.DiffGroup;
 import com.inet.pdfc.generator.model.Modification;
 import com.inet.pdfc.results.ResultModel;
+import com.inet.plugin.PluginFilter;
+import com.inet.plugin.ServerPluginDescription;
+import com.inet.plugin.ServerPluginManager;
 
 import java.io.File;
 import java.util.List;
@@ -13,6 +16,15 @@ import java.util.List;
  * Utils for the sample classes
  */
 public class SampleUtil {
+
+    public static void filterServerPlugins(){
+        ServerPluginManager.getInstance().setPluginFilter( new PluginFilter() {
+            @Override
+            public boolean accept( ServerPluginDescription plugin ) {
+                return !plugin.getId().matches( "(?i)remotegui|webserver|authentication.*|.*setupwizard.*|theme|processbridge.*|embeddedwebsites|errorhandler|pdfcserver|command.*|configuration" );
+            }
+        });
+    }
 
     /**
      * Returns a File object based on a string path

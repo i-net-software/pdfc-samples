@@ -15,6 +15,7 @@ import java.io.File;
 public class SimpleCompareAndExport{
 
     public static void main( String[] args ) {
+        SampleUtil.filterServerPlugins();
         File[] files = getFileOfArguments( args );
 
         //Used the current i-net PDFC configuration. If no configuration has been previously set then the default configuration will be used.

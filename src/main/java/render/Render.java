@@ -40,6 +40,7 @@ public class Render {
      * @param args Expected 2 arguments, the path of the PDF files
      */
     public static void main( String[] args ) {
+        SampleUtil.filterServerPlugins();
         File[] files = getFileOfArguments( args );
         new Render( files ).show();
     }

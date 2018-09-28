@@ -23,6 +23,7 @@ import java.io.OutputStream;
 public class ReportingToSpecificFilename {
 
     public static void main( String[] args ) {
+        SampleUtil.filterServerPlugins();
         File[] files = getFileOfArguments( args );
         File exportFile = checkAndCreateFile( args[2] );
 

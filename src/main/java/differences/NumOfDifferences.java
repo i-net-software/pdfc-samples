@@ -16,6 +16,7 @@ import java.io.File;
 public class NumOfDifferences {
 
     public static void main( String[] args ) {
+        SampleUtil.filterServerPlugins();
         File[] files = getFileOfArguments( args );
         PDFComparer pdfComparer = new PDFComparer();
 

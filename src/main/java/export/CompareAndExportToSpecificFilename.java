@@ -20,6 +20,7 @@ import java.io.*;
 public class CompareAndExportToSpecificFilename {
 
     public static void main( String[] args ) {
+        SampleUtil.filterServerPlugins();
         File[] files = getFileOfArguments( args );
         File exportFile = checkAndCreateFile( args[2] );
 

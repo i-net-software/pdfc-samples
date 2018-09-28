@@ -18,6 +18,7 @@ import java.util.List;
 public class NumOfDifferencePerPage {
 
     public static void main( String[] args ) {
+        SampleUtil.filterServerPlugins();
         File[] files = getFileOfArguments( args );
 
         PDFComparer pdfComparer = new PDFComparer();
