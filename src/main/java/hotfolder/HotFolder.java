@@ -53,7 +53,7 @@ public class HotFolder {
         if( !Files.exists( reportsPath ) ) {
             Files.createDirectories( reportsPath );
         }
-        System.out.println( "watching for new files at " + sourcePath.toAbsolutePath().toString() );
+        System.out.println( "watching for new files at " + sourcePath.toAbsolutePath() );
         WatchDir.WatchEventListener listener = ( ev, path ) -> {
             try {
                 if( ev.kind() == StandardWatchEventKinds.ENTRY_CREATE &&
@@ -66,7 +66,7 @@ public class HotFolder {
                         comparer.addPresenter( new DifferencesPDFPresenter(
                                         new File( reportsPath.toFile(), "ComparisonReports-" + datetime ) ) );
                         ResultModel result = comparer.compare( firstPdfPath.toFile(), path.toFile() );
-                        System.out.println( "Compared " + firstPdfPath.toString() + " to " + path.toString() + "." );
+                        System.out.println( "Compared " + firstPdfPath + " to " + path + "." );
                         System.out.println( "Differences found: " + result.getDifferencesCount( false ) );
                         Files.move( firstPdfPath, archivePath.resolve( firstPdfPath.getFileName() ) );
                         Files.move( path, archivePath.resolve( path.getFileName() ) );

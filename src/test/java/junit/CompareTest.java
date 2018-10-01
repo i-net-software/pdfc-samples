@@ -1,6 +1,5 @@
 package junit;
 
-import com.inet.pdfc.PDFC;
 import com.inet.pdfc.PDFComparer;
 import com.inet.pdfc.error.PdfcException;
 import com.inet.pdfc.generator.message.InfoData;
@@ -10,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * A sample for writing JUnit test cases using PDFC
