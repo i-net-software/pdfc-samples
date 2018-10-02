@@ -12,7 +12,7 @@ import java.io.File;
 /**
  * Easy example with own profile and setting usage
  */
-public class ExampleCommandLineAccess {
+public class ExampleSDK {
 
     /**
      * Easy example with own profile and setting usage
@@ -20,17 +20,17 @@ public class ExampleCommandLineAccess {
      */
     public static void main( String[] args ) {
         SampleUtil.filterServerPlugins();
-        ExampleCommandLineAccess exampleCommandLineAccess = new ExampleCommandLineAccess();
-        exampleCommandLineAccess.startCompare( getFileOfArguments( args ) );
+        ExampleSDK exampleSDK = new ExampleSDK();
+        exampleSDK.startCompare( getFileOfArguments( args ) );
     }
 
-    private DefaultProfile comparisonSettings;
+    private IProfile comparisonSettings;
     private Settings visibilitySettings;
 
     /**
      * Initialize the sample variables
      */
-    public ExampleCommandLineAccess(){
+    public ExampleSDK(){
         comparisonSettings = new DefaultProfile(  );
         comparisonSettings.putValue( PDFCProperty.CONTINUOUS_COMPARE, "CONTINUOUS" );
         comparisonSettings.putValue( PDFCProperty.COMPARE_TYPES, CompareType.TEXT.name() );
