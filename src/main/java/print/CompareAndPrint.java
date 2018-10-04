@@ -13,10 +13,14 @@ import javax.print.attribute.standard.*;
 import java.io.File;
 
 /**
- * Created by richardr on 03.06.2016.
+ * Example for print the comparison result.
  */
 public class CompareAndPrint {
 
+    /**
+     * Example for print the comparison result.
+     * @param args Expected 2 arguments, the path of the PDF files
+     */
     public static void main( String[] args ) {
         SampleUtil.filterServerPlugins();
         File[] files = getFileOfArguments( args );
@@ -49,7 +53,7 @@ public class CompareAndPrint {
      */
     public static File[] getFileOfArguments( final String[] args ) {
         if( args == null || args.length != 2 ) {
-            throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2>" );
+            throw new IllegalArgumentException( "Usage: CompareAndPrint <PDF-File1> <PDF-File2>" );
         }
         return new File[] { SampleUtil.checkAndGetFile( args[0] ), SampleUtil.checkAndGetFile( args[1] ) };
     }

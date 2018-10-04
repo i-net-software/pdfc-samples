@@ -75,7 +75,7 @@ public class ExampleSDK {
      */
     public static File getFileOfArguments(final String[] args){
         if (args == null || args.length != 1) {
-            throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-Directory-Output>" );
+            throw new IllegalArgumentException( "Usage: ExampleSDK <PDF-Directory-Output>" );
         }
         if( args[0] == null ) {
             throw new IllegalArgumentException( "The parameter is empty.\n parameter = " + args[0] );

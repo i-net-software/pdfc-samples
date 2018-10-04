@@ -71,7 +71,7 @@ public class CompareAndPrintWithPrintsetting {
      */
     public static File[] getFileOfArguments( final String[] args ) {
         if( args == null || args.length != 2 ) {
-            throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2>" );
+            throw new IllegalArgumentException( "Usage: CompareAndPrintWithPrintsetting <PDF-File1> <PDF-File2>" );
         }
         return new File[] { checkAndGetFile( args[0] ), checkAndGetFile( args[1] ) };
     }

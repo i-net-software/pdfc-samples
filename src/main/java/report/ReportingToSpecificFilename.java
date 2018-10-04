@@ -39,7 +39,9 @@ public class ReportingToSpecificFilename {
         }
     }
 
-
+    /**
+     * Modified presenter for export the pdf as report
+     */
     public static class PersonalReportPDFPresenter extends ReportPDFPresenter{
 
         /**
@@ -75,11 +77,19 @@ public class ReportingToSpecificFilename {
      */
     public static File[] getFileOfArguments(final String[] args){
         if (args == null || args.length != 3  ) {
-            throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2> <PDF-File-Output>" );
+            throw new IllegalArgumentException( "Usage: ReportingToSpecificFilename <PDF-File1> <PDF-File2> <PDF-File-Output>" );
         }
         return new File[]{ SampleUtil.checkAndGetFile( args[0] ), SampleUtil.checkAndGetFile( args[1] )};
     }
 
+    /**
+     * Returns a File object based on a string path
+     * The file must not be null and must not be a directory
+     * If the file not exist, it will be created
+     *
+     * @param file location to the file
+     * @return The File object
+     */
     public static File checkAndCreateFile( final String file){
         final File fileObject = new File( file );
 

@@ -48,7 +48,7 @@ public class OutputSpecifyModifyTypes {
      */
     public static File[] getFileOfArguments( final String[] args ) {
         if( args == null || args.length != 2 ) {
-            throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2>" );
+            throw new IllegalArgumentException( "Usage: OutputSpecifyModifyTypes <PDF-File1> <PDF-File2>" );
         }
         return new File[] { SampleUtil.checkAndGetFile( args[0] ), SampleUtil.checkAndGetFile( args[1] ) };
     }

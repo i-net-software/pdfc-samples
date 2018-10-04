@@ -19,6 +19,10 @@ import java.io.File;
  */
 public class SimpleCompareAndPrint {
 
+    /**
+     * A simple Sample for print the comparing between 2 PDF Files
+     * @param args Expected 2 arguments, the path of the pdf files
+     */
     public static void main( String[] args ) {
         SampleUtil.filterServerPlugins();
         File[] files = getFileOfArguments( args );
@@ -46,7 +50,7 @@ public class SimpleCompareAndPrint {
      */
     public static File[] getFileOfArguments(final String[] args){
         if (args == null || args.length != 2) {
-            throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2>" );
+            throw new IllegalArgumentException( "Usage: SimpleCompareAndPrint <PDF-File1> <PDF-File2>" );
         }
         return new File[]{ SampleUtil.checkAndGetFile( args[0] ), SampleUtil.checkAndGetFile( args[1] )};
     }

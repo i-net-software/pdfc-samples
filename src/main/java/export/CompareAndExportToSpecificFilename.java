@@ -25,41 +25,13 @@ public class CompareAndExportToSpecificFilename {
         File exportFile = checkAndCreateFile( args[2] );
 
         //Used the current i-net PDFC configuration. If no configuration has been previously set then the default configuration will be used.
-        DifferencesPDFPresenter differencesPDFPresenter = new PersonalDifferencesPDFPresenter( exportFile );
+        DifferencesPDFPresenter differencesPDFPresenter = new DifferencesPDFPresenter( exportFile, false );
         PDFComparer pdfComparer = new PDFComparer().addPresenter( new DifferencesPDFPresenter( files[0].getParentFile() ) ).addPresenter( differencesPDFPresenter );
         try {
             pdfComparer.compare( files[1], files[0] );
             SampleUtil.showPresenterError( pdfComparer );
         } catch( PdfcException e ) {
             e.printStackTrace();
-        }
-    }
-
-
-    public static class PersonalDifferencesPDFPresenter extends DifferencesPDFPresenter{
-
-        /**
-         * Export File
-         */
-        private File exportFile  = null;
-
-        public PersonalDifferencesPDFPresenter(  File export ) {
-            super( null );
-            exportFile =  export;
-        }
-
-        /**
-         * The import methode, to change the path of the export file
-         * @return stream for export file
-         * @throws IOException
-         */
-        @Override
-        protected OutputStream getExportStream() throws IOException {
-            if(exportFile == null) {
-                return super.getExportStream();
-            }else{
-                return new FileOutputStream(exportFile);
-            }
         }
     }
 
@@ -71,11 +43,18 @@ public class CompareAndExportToSpecificFilename {
      */
     public static File[] getFileOfArguments(final String[] args){
         if (args == null || args.length != 3  ) {
-            throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2> <PDF-File-Output>" );
+            throw new IllegalArgumentException( "Usage: CompareAndExportToSpecificFilename <PDF-File1> <PDF-File2> <PDF-File-Output>" );
         }
         return new File[]{ SampleUtil.checkAndGetFile( args[0] ), SampleUtil.checkAndGetFile( args[1] )};
     }
 
+    /**
+     * Returns a File object based on a string path
+     * The file must not be null, must exist and must not be a directory
+     *
+     * @param file path to the file
+     * @return The File object
+     */
     public static File checkAndCreateFile( final String file){
         final File fileObject = new File( file );
 

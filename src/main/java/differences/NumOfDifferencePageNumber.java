@@ -16,6 +16,10 @@ import java.io.File;
  */
 public class NumOfDifferencePageNumber{
 
+    /**
+     * A sample to show the difference number of pages between 2 pdf files.
+     * @param args Expected 2 arguments, the path of the pdf files
+     */
     public static void main( String[] args ) {
         SampleUtil.filterServerPlugins();
         File[] files = getFileOfArguments( args );
@@ -42,7 +46,7 @@ public class NumOfDifferencePageNumber{
      */
     public static File[] getFileOfArguments(final String[] args){
         if (args == null || args.length != 2) {
-            throw new IllegalArgumentException( "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2>" );
+            throw new IllegalArgumentException( "Usage: NumOfDifferencePageNumber <PDF-File1> <PDF-File2>" );
         }
         return new File[]{ SampleUtil.checkAndGetFile( args[0] ), SampleUtil.checkAndGetFile( args[1] )};
     }

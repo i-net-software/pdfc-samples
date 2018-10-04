@@ -54,7 +54,7 @@ public class UseXMLConfiguration {
     public static File[] getFileOfArguments( final String[] args ) {
         if( args == null || args.length != 3 ) {
             throw new IllegalArgumentException(
-                            "Usage: CompareTwoFilesAndPrint <PDF-File1> <PDF-File2> <XML-Configuration-File>" );
+                            "Usage: UseXMLConfiguration <PDF-File1> <PDF-File2> <XML-Configuration-File>" );
         }
         return new File[] { SampleUtil.checkAndGetFile( args[0] ), SampleUtil.checkAndGetFile( args[1] ), SampleUtil.checkAndGetFile( args[2] ) };
     }
