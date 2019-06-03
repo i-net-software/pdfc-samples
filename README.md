@@ -31,8 +31,10 @@ Alternatively, if you are using an IDE like eclipse or IntelliJ Idea, you can cl
 
 Download the latest PDFC SDK at https://download.inetsoftware.de/pdfc-sdk-latest.zip and unzip the archive to a local directory. After that
  
-1. copy the files `i-net PDFC/java/PDFC.jar` and `i-net PDFC/java/inetcore.jar` into the `lib` folder of the project and add these jar-files to the classpath. 
-2. copy at least the files `plugins/reporting.zip`, all `plugins/parser.*.zip` and all `plugins/filter.*.zip`into the `plugins`-folder of the project
+1. copy the files `i-net PDFC/java/PDFC.jar` and `i-net PDFC/java/inetcore.jar` into the `lib` folder of the project and add these jar-files to the classpath.
+2. copy the directory `i-net PDFC/lang` into the project folder (only for tesseract (OCR) usage)
+3. copy at least the files `plugins/reporting.zip`, all `plugins/parser.*.zip` and all `plugins/filter.*.zip`into the
+`plugins`-folder of the project
 
 After that, you are able to compile the project and run the sample programs. 
  
